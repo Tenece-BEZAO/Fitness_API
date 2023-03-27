@@ -21,8 +21,10 @@
 
   <ItemGroup>
     <None Remove="Enums\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
