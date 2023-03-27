@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\LoggerServices\LoggerServices.csproj" />
     <ProjectReference Include="..\Fitness.BLL\Fitness.BLL.csproj" />
     <ProjectReference Include="..\Fitness.Shared\Fitness.Shared.csproj" />
   </ItemGroup>
