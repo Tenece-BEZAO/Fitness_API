@@ -1,4 +1,4 @@
-﻿using Fitness.BLL.Interfaces;
+﻿using Fitness.BLL.Interface;
 using NLog;
 using System;
 using System.Collections.Generic;
