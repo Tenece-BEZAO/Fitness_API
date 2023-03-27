@@ -1,3 +1,7 @@
+using Fitness.BLL.Implementation;
+using Fitness.BLL.Interface;
+using Fitness.DAL.DBContext;
+
 namespace Fitness.API
 {
     public class Program
@@ -9,6 +13,7 @@ namespace Fitness.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork<FitnessDbContext>>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
