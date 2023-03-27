@@ -1,6 +1,6 @@
-using Fitness.BLL.Implementation;
-using Fitness.BLL.Interface;
-using Fitness.DAL.DBContext;
+using Fitness.API.Extensions;
+using Microsoft.AspNetCore.HttpOverrides;
+using NLog;
 
 namespace Fitness.API
 {
@@ -10,10 +10,16 @@ namespace Fitness.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),
+                "/nlog.config"));    
+
+            builder.Services.ConfigureCors();
+            builder.Services.ConfigureIISIntegration();
+            builder.Services.ConfigureLoggerService();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork<FitnessDbContext>>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -25,9 +31,16 @@ namespace Fitness.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+                app.UseDeveloperExceptionPage();
+            } else app.UseHsts();
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

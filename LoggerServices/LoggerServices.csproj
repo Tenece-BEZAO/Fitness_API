@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Implementations\**" />
-    <EmbeddedResource Remove="Implementations\**" />
-    <None Remove="Implementations\**" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fitness.DAL\Fitness.DAL.csproj" />
+    <ProjectReference Include="..\Fitness\Fitness.BLL\Fitness.BLL.csproj" />
   </ItemGroup>
 
 </Project>
