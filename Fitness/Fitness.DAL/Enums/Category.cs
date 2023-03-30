@@ -3,7 +3,7 @@ namespace Fitness.DAL.Enums
 {
     public enum Category
     {
-        Cardio, Strength, Stretches
+        Cardio = 1, Strength, Stretches
     }
     
 }

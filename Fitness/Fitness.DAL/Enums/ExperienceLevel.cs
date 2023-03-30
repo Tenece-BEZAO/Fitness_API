@@ -3,7 +3,7 @@ namespace Fitness.DAL.Enums
 {
     public enum ExperienceLevel
     {
-        Beginner, Intermediate, Pro
+        Beginner = 1, Intermediate, Pro
 
     }
 
