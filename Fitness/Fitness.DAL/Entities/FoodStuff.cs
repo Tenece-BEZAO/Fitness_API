@@ -11,13 +11,12 @@ namespace Fitness.DAL.Entities
     public class FoodStuff : BaseEntity
     {
         [Required]
-        public Guid FoodStuffId { get; set; }
-        [Required]
         public string Name { get; set; }
+        public int AmtConsumed { get; set; } = 1;
         [Required]
         public int Calories { get; set; }
         [Required]
         public FoodClass FoodClass { get; set; }
-        public ICollection<MealFoodStuff> Meals { get; set; }
+        public ICollection<MealLog> MealLogs { get; set; }
     }
 }

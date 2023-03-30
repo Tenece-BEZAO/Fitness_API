@@ -63,7 +63,7 @@ namespace Fitness.DAL.Configuration
                     {
                         Id = Guid.Parse("913D8E9E-D6C3-4211-9FC2-6E4058247D0C").ToString(),
                         Name = "Pork",
-                        Calories = 232,
+                        Calories = 132,
                         FoodClass = Enums.FoodClass.Fats
                     },
                     new FoodStuff
