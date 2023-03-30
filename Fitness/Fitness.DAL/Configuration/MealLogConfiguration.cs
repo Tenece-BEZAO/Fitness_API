@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fitness.DAL.Enums
+namespace Fitness.DAL.Configuration
 {
-    public enum MealTime
+    internal class MealLogConfiguration
     {
-        Breakfast = 1, 
-        Lunch, 
-        Dinner
     }
 }

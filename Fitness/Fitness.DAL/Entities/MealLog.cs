@@ -1,4 +1,5 @@
 ﻿using Fitness.DAL.Enums;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,16 +9,15 @@ using System.Threading.Tasks;
 
 namespace Fitness.DAL.Entities
 {
-    public class FoodStuff : BaseEntity
+    public class MealLog : BaseEntity
     {
         [Required]
-        public Guid FoodStuffId { get; set; }
-        [Required]
-        public string Name { get; set; }
+        public Guid MealPlanLogId { get; set; }
+        public string? Name { get; set; }
         [Required]
         public int Calories { get; set; }
         [Required]
-        public FoodClass FoodClass { get; set; }
-        public ICollection<MealFoodStuff> Meals { get; set; }
+        public MealTime MealTime { get; set; }
+        public ICollection<FoodStuff> FoodStuffs { get; set; }
     }
 }

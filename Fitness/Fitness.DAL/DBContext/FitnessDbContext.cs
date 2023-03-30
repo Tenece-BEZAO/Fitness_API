@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fitness.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitness.DAL.DBContext
 {
-    internal class FitnessDbContext
+    public class FitnessDbContext : DbContext
     {
+
+        public DbSet<MealLog> MealPlanLogs { get; set; }
+        public DbSet<FoodStuff> FoodStuffs { get; set; }
+
+        public FitnessDbContext(DbContextOptions<FitnessDbContext> options)
+            : base(options)
+        {
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
     }
 }
