@@ -10,6 +10,8 @@ namespace Fitness.DAL.Entities
         public string Description { get; set; }
 
         public List<FitFamer> FitFamers { get; set; }
+
+
         
     }
 }

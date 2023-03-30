@@ -8,8 +8,7 @@ namespace Fitness.DAL.Entities
         public string FitFamerId { get; set; }
         public List<FitFamer> FitFamers { get; set; }
         public DateTime Date { get; set; }
-        public int Duration { get; set; }
-        public IntensityLevel IntensityLevel { get; set; }
+        public decimal LiveWeight { get; set; }
     }
 }
 

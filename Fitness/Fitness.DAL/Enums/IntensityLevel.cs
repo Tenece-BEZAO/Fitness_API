@@ -3,7 +3,7 @@ namespace Fitness.DAL.Enums
 {
     public enum IntensityLevel
     {
-        Low, Moderate, Vigorous
+        Low = 1, Moderate, Vigorous
     }
     
 }
