@@ -13,5 +13,6 @@ namespace Fitness.DAL.Entities
         public FitFamer FitFamer { get; set; }
         public string AchievementId { get; set; }
         public virtual Achievement Achievement { get; set; }
+        public DateTime Date { get; set; }
     }
 }
