@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fitness.DAL.Entities
 {
-    public class UserMealLog : MealPlanLog
+    public class UserMealLog : MealLog
     {
         public List<FitFamer> FitFamers { get; set; }
 
