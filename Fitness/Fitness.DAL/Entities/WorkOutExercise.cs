@@ -1,4 +1,4 @@
-﻿using System;
+﻿  using System;
 using Fitness.DAL.Enums;
 
 namespace Fitness.DAL.Entities

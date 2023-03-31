@@ -12,5 +12,6 @@ namespace Fitness.DAL.Entities
         public string Name { get; set; }
         public int Calories { get; set; }
         public FoodClass FoodClass { get; set; }
+        public List<FitFamer> FitFamers { get; set; }
     }
 }

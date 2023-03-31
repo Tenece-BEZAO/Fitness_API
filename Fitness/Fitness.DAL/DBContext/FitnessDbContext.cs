@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Fitness.DAL.DBContext
 {
@@ -32,5 +33,7 @@ namespace Fitness.DAL.DBContext
         public DbSet<WorkOut> WorkOuts { get; set; }
         public DbSet<UserAchievement> UserAchievements { get; set; }
         public DbSet<WorkOutExercise> WorkOutExercises { get; set; }
+        public DbSet<MealPlanLog> MealPlanLogs { get; set; }
+        public DbSet<UserMealLog> UserMealLogs { get; set; }
     }
 }

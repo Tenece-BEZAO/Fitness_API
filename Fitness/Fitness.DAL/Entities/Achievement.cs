@@ -11,7 +11,6 @@ namespace Fitness.DAL.Entities
         public List<FitFamer> FitFamers { get; set; }
 
 
-        
     }
 }
 

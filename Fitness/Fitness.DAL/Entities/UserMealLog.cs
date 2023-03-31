@@ -9,9 +9,7 @@ namespace Fitness.DAL.Entities
 {
     public class UserMealLog : MealPlanLog
     {
-       
-        public Guid UserId { get; set; }
-        public User User { get; set; }
+        public List<FitFamer> FitFamers { get; set; }
 
     }
 
