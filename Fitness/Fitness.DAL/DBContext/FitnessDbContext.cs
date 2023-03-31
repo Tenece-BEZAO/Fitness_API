@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Fitness.DAL.Configurations;
+using Fitness.DAL.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +22,19 @@ namespace Fitness.DAL.DBContext
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<MealLog>()
+                .HasMany(p => p.FoodStuffs)
+                .WithMany(p => p.MealLogs)
+                .UsingEntity(j => j.HasData
+                (
+                new { MealLogsName = "Jollof rice", FoodStuffsName = "Rice" },
+                new { MealLogsName = "Jollof rice", FoodStuffsName = "Egg" },
+                new { MealLogsName = "Jollof rice", FoodStuffsName = "Chicken" }
+                ));        
+
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new MealLogConfiguration());
+            builder.ApplyConfiguration(new FoodStuffConfiguration());
         }
 
         public DbSet<Admin> Admins { get; set; }
@@ -28,5 +45,8 @@ namespace Fitness.DAL.DBContext
         public DbSet<WorkOut> WorkOuts { get; set; }
         public DbSet<UserAchievement> UserAchievements { get; set; }
         public DbSet<WorkOutExercise> WorkOutExercises { get; set; }
+        public DbSet<MealLog> MealPlanLogs { get; set; }
+        public DbSet<FoodStuff> FoodStuffs { get; set; }
+        public DbSet<UserMealLog> UserMeals { get; set; }
     }
 }

@@ -10,8 +10,8 @@ namespace Fitness.DAL.Entities
     public class UserMealLog : MealLog
     {
        
-        public Guid UserId { get; set; }
-        public User User { get; set; }
+        public int FitFamerId { get; set; }
+        public FitFamer FitFamer { get; set; }
 
     }
 
