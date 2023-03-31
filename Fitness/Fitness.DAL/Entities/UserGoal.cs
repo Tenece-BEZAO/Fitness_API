@@ -11,7 +11,6 @@ namespace Fitness.DAL.Entities
         public DateTime EndDate { get; set; }
         public decimal TargetWeight { get; set; }
         public Status Status { get; set; }
-        public string FitFamerId { get; set; }
         public List<FitFamer> FitFamers { get; set; }
     }
 }
