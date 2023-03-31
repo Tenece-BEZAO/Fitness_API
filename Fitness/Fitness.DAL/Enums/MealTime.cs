@@ -8,6 +8,8 @@ namespace Fitness.DAL.Enums
 {
     public enum MealTime
     {
-        Breakfast, Lunch, Dinner
+        Breakfast = 1, 
+        Lunch, 
+        Dinner
     }
 }
