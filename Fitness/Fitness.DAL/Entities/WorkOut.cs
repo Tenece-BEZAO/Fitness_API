@@ -5,11 +5,10 @@ namespace Fitness.DAL.Entities
 {
     public class WorkOut : BaseEntity
     {
-        public string UserId { get; set; }
-        public User User { get; set; }
+        public string FitFamerId { get; set; }
+        public List<FitFamer> FitFamers { get; set; }
         public DateTime Date { get; set; }
-        public DateTime Duration { get; set; }
-        public IntensityLevel intensityLevel { get; set; }
+        public decimal LiveWeight { get; set; }
     }
 }
 

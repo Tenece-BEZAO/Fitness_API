@@ -1,36 +1,32 @@
-﻿using Fitness.DAL.Configuration;
-using Fitness.DAL.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Fitness.DAL.DBContext
 {
-    public class FitnessDbContext : DbContext
+    public class FitnessDbContext : IdentityDbContext<User>
     {
-
-        public DbSet<MealLog> MealPlanLogs { get; set; }
-        public DbSet<FoodStuff> FoodStuffs { get; set; }
-
-        public FitnessDbContext(DbContextOptions<FitnessDbContext> options)
-            : base(options)
+        public FitnessDbContext(DbContextOptions<FitnessDbContext> options) : base(options)
         {
-
+            
         }
 
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.Entity<MealLog>()
-                .HasMany(p => p.FoodStuffs)
-                .WithMany(p => p.MealLogs)
-                .UsingEntity(j => j.HasData
-                (
-                new { MealLogsName = "Jollof rice", FoodStuffsName = "Rice" },
-                new { MealLogsName = "Jollof rice", FoodStuffsName = "Egg" },
-                new { MealLogsName = "Jollof rice", FoodStuffsName = "Chicken"}
-                ));
+            base.OnModelCreating(builder);
 
-            modelBuilder.ApplyConfiguration(new MealLogConfiguration());
-            modelBuilder.ApplyConfiguration(new FoodStuffConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
+
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<FitFamer> FitFamers { get; set; }
+        public DbSet<Achievement> Achievements { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<UserGoal> UserGoals { get; set; }
+        public DbSet<WorkOut> WorkOuts { get; set; }
+        public DbSet<UserAchievement> UserAchievements { get; set; }
+        public DbSet<WorkOutExercise> WorkOutExercises { get; set; }
     }
 }

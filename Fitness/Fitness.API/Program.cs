@@ -12,11 +12,12 @@ namespace Fitness.API
 
             LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),
                 "/nlog.config"));    
-
+            
             builder.Services.ConfigureCors();
             builder.Services.ConfigureIISIntegration();
             builder.Services.ConfigureLoggerService();
-
+            builder.Services.AddAuthentication();
+            builder.Services.ConfigureIdentity();
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -42,6 +43,7 @@ namespace Fitness.API
             });
             app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

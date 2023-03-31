@@ -12,7 +12,7 @@ namespace Fitness.BLL.Implementation
     {
         private readonly FitnessDbContext _context;
 
-        public UserService(IUserService context)
+        public UserService(FitnessDbContext context)
         {
             _context = context;
         }

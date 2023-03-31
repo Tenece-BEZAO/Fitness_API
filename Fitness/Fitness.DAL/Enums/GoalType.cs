@@ -3,7 +3,7 @@ namespace Fitness.DAL.Enums
 {
     public enum GoalType
     {
-        LoseWeight, GainWeight, MaintainWeight
+        LoseWeight = 1, GainWeight, MaintainWeight
     }
     
 }
