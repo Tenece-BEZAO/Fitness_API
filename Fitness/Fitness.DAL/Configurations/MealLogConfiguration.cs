@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Fitness.DAL.Configuration
+namespace Fitness.DAL.Configurations
 {
     public class MealLogConfiguration : IEntityTypeConfiguration<MealLog>
     {
