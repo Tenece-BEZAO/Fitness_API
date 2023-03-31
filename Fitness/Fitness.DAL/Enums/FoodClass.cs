@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fitness.DAL.Enums
 {
-    public class FoodClass
+    public enum FoodClass
     {
     }
 }

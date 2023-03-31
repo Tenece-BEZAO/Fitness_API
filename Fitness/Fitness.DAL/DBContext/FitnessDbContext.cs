@@ -35,5 +35,6 @@ namespace Fitness.DAL.DBContext
         public DbSet<WorkOutExercise> WorkOutExercises { get; set; }
         public DbSet<MealPlanLog> MealPlanLogs { get; set; }
         public DbSet<UserMealLog> UserMealLogs { get; set; }
+        public DbSet<FoodStuff> FoodStuff { get; set; }
     }
 }

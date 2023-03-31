@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Fitness.DAL.Entities
 {
-    public class FoodStuff
+    public class FoodStuff: BaseEntity
     {
         public string Name { get; set; }
         public int Calories { get; set; }
         public FoodClass FoodClass { get; set; }
-        public List<FitFamer> FitFamers { get; set; }
+        
     }
 }

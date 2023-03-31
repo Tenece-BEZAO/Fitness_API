@@ -5,7 +5,6 @@ namespace Fitness.DAL.Entities
 {
     public class FitFamer : BaseEntity
     {
-        public int FitFamerId { get; set; }
         public double Height { get; set; }
         public double CurrentWeight { get; set; }
         public double GoalWeight { get; set; }
