@@ -13,20 +13,13 @@ namespace Fitness.DAL.Entities
         public User User { get; set; }
         public string UserGoalId { get; set; }
         public UserGoal UserGoal { get; set; }
-
-
         public string UserMealLogId { get; set; }
         public UserMealLog UserMealLog { get; set; }
         public string WorkOutId { get; set; }
-
-
-
         public WorkOut WorkOut { get; set; }
         public List<Achievement> Achievements { get; set; }
         public List<Exercise> Exercises { get; set; }
-
         public List<FoodStuff> FoodStuff { get; set; }
-
         public List<UserMealLog> UserMealLogs { get; set; }
 
 
