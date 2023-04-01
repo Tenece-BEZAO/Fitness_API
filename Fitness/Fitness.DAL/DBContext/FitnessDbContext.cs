@@ -23,6 +23,13 @@ namespace Fitness.DAL.DBContext
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new RoleConfiguration());
+
+
+            builder.ApplyConfiguration(new MealLogConfiguration());
+            builder.ApplyConfiguration(new FoodStuffConfiguration());
+            builder.ApplyConfiguration(new UserGoalConfiguration());
+            builder.ApplyConfiguration(new WorkOutConfiguration());
+
         }
 
         public DbSet<Admin> Admins { get; set; }
