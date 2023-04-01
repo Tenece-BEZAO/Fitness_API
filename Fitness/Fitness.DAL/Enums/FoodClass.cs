@@ -8,5 +8,10 @@ namespace Fitness.DAL.Enums
 {
     public enum FoodClass
     {
+        Carbohydrate = 1,
+        Protein, 
+        Fats, 
+        Vitamins, 
+        Minerals
     }
 }
