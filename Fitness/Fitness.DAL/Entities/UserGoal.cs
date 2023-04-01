@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.NetworkInformation;
-using Fitness.DAL.Enums;
+﻿using Fitness.DAL.Enums;
 
 namespace Fitness.DAL.Entities
 {
