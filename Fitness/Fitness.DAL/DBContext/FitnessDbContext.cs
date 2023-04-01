@@ -2,12 +2,6 @@
 using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.DAL.DBContext
 {
@@ -15,7 +9,7 @@ namespace Fitness.DAL.DBContext
     {
         public FitnessDbContext(DbContextOptions<FitnessDbContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -33,8 +27,14 @@ namespace Fitness.DAL.DBContext
                 ));        
 
             builder.ApplyConfiguration(new RoleConfiguration());
+
+
             builder.ApplyConfiguration(new MealLogConfiguration());
             builder.ApplyConfiguration(new FoodStuffConfiguration());
+            builder.ApplyConfiguration(new UserGoalConfiguration());
+            builder.ApplyConfiguration(new WorkOutConfiguration());
+
+
         }
 
         public DbSet<Admin> Admins { get; set; }
@@ -45,8 +45,10 @@ namespace Fitness.DAL.DBContext
         public DbSet<WorkOut> WorkOuts { get; set; }
         public DbSet<UserAchievement> UserAchievements { get; set; }
         public DbSet<WorkOutExercise> WorkOutExercises { get; set; }
+
         public DbSet<MealLog> MealPlanLogs { get; set; }
         public DbSet<FoodStuff> FoodStuffs { get; set; }
         public DbSet<UserMealLog> UserMeals { get; set; }
+
     }
 }

@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace Fitness.DAL.Entities
 {
+
     public class FoodStuff : BaseEntity
+
     {
         [Required]
         public string Name { get; set; }
@@ -17,6 +19,7 @@ namespace Fitness.DAL.Entities
         public int Calories { get; set; }
         [Required]
         public FoodClass FoodClass { get; set; }
+
         public ICollection<MealLog> MealLogs { get; set; }
     }
 }
