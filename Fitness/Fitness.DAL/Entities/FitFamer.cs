@@ -1,5 +1,4 @@
 ﻿using Fitness.DAL.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fitness.DAL.Entities
 {
@@ -13,8 +12,6 @@ namespace Fitness.DAL.Entities
         public User User { get; set; }
         public string UserGoalId { get; set; }
         public UserGoal UserGoal { get; set; }
-        public string UserMealLogId { get; set; }
-        public UserMealLog UserMealLog { get; set; }
         public string WorkOutId { get; set; }
         public WorkOut WorkOut { get; set; }
         public List<Achievement> Achievements { get; set; }

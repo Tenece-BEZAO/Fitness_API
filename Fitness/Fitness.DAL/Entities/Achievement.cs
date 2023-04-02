@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Fitness.DAL.Entities
+﻿namespace Fitness.DAL.Entities
 {
     public class Achievement : BaseEntity
     {
