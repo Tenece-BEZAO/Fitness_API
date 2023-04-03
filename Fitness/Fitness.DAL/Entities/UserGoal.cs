@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.NetworkInformation;
-using Fitness.DAL.Enums;
+﻿using Fitness.DAL.Enums;
 
 namespace Fitness.DAL.Entities
 {
@@ -11,7 +9,6 @@ namespace Fitness.DAL.Entities
         public DateTime EndDate { get; set; }
         public decimal TargetWeight { get; set; }
         public Status Status { get; set; }
-        public string FitFamerId { get; set; }
         public List<FitFamer> FitFamers { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Fitness.DAL.Enums;
+﻿using Fitness.DAL.Enums;
 
 namespace Fitness.DAL.Entities
 {

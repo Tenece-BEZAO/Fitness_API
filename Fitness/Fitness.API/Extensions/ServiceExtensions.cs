@@ -3,6 +3,7 @@ using Fitness.DAL.DBContext;
 using Fitness.DAL.Entities;
 using LoggerServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitness.API.Extensions
 {
@@ -39,6 +40,11 @@ namespace Fitness.API.Extensions
             })
                 .AddEntityFrameworkStores<FitnessDbContext>()
                 .AddDefaultTokenProviders();
+        }
+        public static void AddDBConnection(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<FitnessDbContext>(opts => opts.UseSqlServer(configuration.GetConnectionString("DefaultConn")
+         ));
         }
     }
 }
