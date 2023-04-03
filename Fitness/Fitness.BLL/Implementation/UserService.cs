@@ -1,12 +1,14 @@
 ﻿using Fitness.BLL.DTO;
 using Fitness.BLL.Interface;
 using Fitness.DAL.DBContext;
+
 using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using System.Web;
+
 
 namespace Fitness.BLL.Implementation
 {
