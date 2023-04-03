@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Fitness.BLL.DTO
 {
-     class User
+    public class FitFamerForUpdateDTO
     {
+
     }
 }

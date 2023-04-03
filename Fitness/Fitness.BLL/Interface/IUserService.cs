@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fitness.BLL.DTO;
 
 namespace Fitness.BLL.Interface
 {
     public interface IUserService
     {
+        public Task<Response<FitFamerForRegistrationDTO>> SignUpAsync(FitFamerForRegistrationDTO fitfamer);
+        public Task<string> DeleteAUserAsync(int id);
+        public Task<Response<FitFamerForRegistrationDTO>> GetAUserAsync(string id);
     }
 }
