@@ -199,6 +199,9 @@ namespace Fitness.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("AmtConsumed")
+                        .HasColumnType("int");
+
                     b.Property<int>("Calories")
                         .HasColumnType("int");
 
@@ -239,6 +242,9 @@ namespace Fitness.DAL.Migrations
 
                     b.Property<Guid>("MealLogID")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SecondaryId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SecondaryId")
                         .HasColumnType("int");
@@ -856,6 +862,17 @@ namespace Fitness.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Fitness.DAL.Entities.UserMealLog", b =>
+                {
+                    b.HasOne("Fitness.DAL.Entities.FitFamer", "FitFamer")
+                        .WithMany("UserMealLogs")
+                        .HasForeignKey("FitFamerId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FitFamer");
                 });
 
             modelBuilder.Entity("Fitness.DAL.Entities.FitFamer", b =>

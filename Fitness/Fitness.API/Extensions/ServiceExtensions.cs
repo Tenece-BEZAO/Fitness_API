@@ -3,8 +3,11 @@ using Fitness.BLL.Interface;
 using Fitness.DAL.DBContext;
 using Fitness.DAL.Entities;
 using LoggerServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Fitness.API.Extensions
 {
