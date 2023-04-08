@@ -13,11 +13,13 @@ namespace Fitness.API
             LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),
                 "/nlog.config"));
             builder.Services.AddDBConnection(builder.Configuration);
+            builder.Services.ConfigureJWT(builder.Configuration);
             builder.Services.ConfigureCors();
             builder.Services.ConfigureIISIntegration();
             builder.Services.ConfigureLoggerService();
             builder.Services.AddAuthentication();
             builder.Services.ConfigureIdentity();
+            
             // Add services to the container.
 
             builder.Services.AddControllers();

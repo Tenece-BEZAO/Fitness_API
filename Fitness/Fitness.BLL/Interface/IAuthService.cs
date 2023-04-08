@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fitness.BLL.DTO;
 
 namespace Fitness.BLL.Interface
 {
-    public class IAuthService
+    public interface IAuthService
     {
+        public Task<Response<FitFamerForAuthDTO>> LogInAsync(string email, string password);
     }
 }
