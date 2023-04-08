@@ -1,4 +1,4 @@
-﻿using Fitness.DAL.Entities;
+﻿/*using Fitness.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -36,3 +36,4 @@ namespace Fitness.DAL.Configurations
         }
     }
 }
+*/

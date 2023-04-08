@@ -1,4 +1,5 @@
-﻿using Fitness.BLL.Interface;
+﻿using Fitness.BLL.Implementation;
+using Fitness.BLL.Interface;
 using Fitness.DAL.DBContext;
 using Fitness.DAL.Entities;
 using LoggerServices;
@@ -45,6 +46,16 @@ namespace Fitness.API.Extensions
         {
             services.AddDbContext<FitnessDbContext>(opts => opts.UseSqlServer(configuration.GetConnectionString("DefaultConn")
          ));
+        }
+
+        public static void RegisterServices(this IServiceCollection services)
+        {
+            services.AddTransient<IServiceFactory, ServiceFactory>();
+            services.AddTransient<DbContext, FitnessDbContext>();
+            services.AddTransient<IUnitOfWork, UnitOfWork<FitnessDbContext>>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IFoodStuffService, FoodStuffService>();
+            services.AddTransient<IMealLogService, MealLogService>();
         }
     }
 }

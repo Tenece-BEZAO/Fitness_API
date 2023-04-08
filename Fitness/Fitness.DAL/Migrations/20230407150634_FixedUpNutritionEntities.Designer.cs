@@ -4,6 +4,7 @@ using Fitness.DAL.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness.DAL.Migrations
 {
     [DbContext(typeof(FitnessDbContext))]
-    partial class FitnessDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230407150634_FixedUpNutritionEntities")]
+    partial class FixedUpNutritionEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,9 +198,8 @@ namespace Fitness.DAL.Migrations
 
             modelBuilder.Entity("Fitness.DAL.Entities.FoodStuff", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Calories")
                         .HasColumnType("int");
@@ -208,8 +210,9 @@ namespace Fitness.DAL.Migrations
                     b.Property<int>("FoodClass")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SecondaryId")
                         .HasColumnType("int");
@@ -217,7 +220,7 @@ namespace Fitness.DAL.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
                     b.ToTable("FoodStuffs");
                 });
@@ -234,8 +237,9 @@ namespace Fitness.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("FoodStuffId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("FoodStuffName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid>("MealLogID")
                         .HasColumnType("uniqueidentifier");
@@ -248,7 +252,7 @@ namespace Fitness.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FoodStuffId");
+                    b.HasIndex("FoodStuffName");
 
                     b.HasIndex("MealLogID");
 
@@ -271,7 +275,6 @@ namespace Fitness.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SecondaryId")
@@ -551,15 +554,15 @@ namespace Fitness.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "39bb11f0-de49-44ec-9447-97b3b819bf6a",
-                            ConcurrencyStamp = "21252515-1390-4ad8-a763-bc6e17de8b91",
+                            Id = "c863ac44-3be5-4ca4-9d10-7828aa6ca2d4",
+                            ConcurrencyStamp = "7baf0967-e855-4439-9e24-5ecc317903d0",
                             Name = "FitFamer",
                             NormalizedName = "FITFAMER"
                         },
                         new
                         {
-                            Id = "7c9fbccd-121f-443e-9d8c-cf9d721283a8",
-                            ConcurrencyStamp = "93479ae9-d735-4e32-9594-81c21c05f393",
+                            Id = "7f29b2dc-50ee-4e89-bea8-87d288f33a5f",
+                            ConcurrencyStamp = "e709c4c2-f92a-408a-8bdf-b909cbbb651a",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -743,7 +746,7 @@ namespace Fitness.DAL.Migrations
                 {
                     b.HasOne("Fitness.DAL.Entities.FoodStuff", "FoodStuff")
                         .WithMany()
-                        .HasForeignKey("FoodStuffId")
+                        .HasForeignKey("FoodStuffName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
