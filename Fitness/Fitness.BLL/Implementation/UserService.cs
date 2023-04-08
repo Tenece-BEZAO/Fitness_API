@@ -1,13 +1,8 @@
 ﻿using Fitness.BLL.DTO;
 using Fitness.BLL.Interface;
-using Fitness.DAL.DBContext;
 
 using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using System.Web;
 
 
 namespace Fitness.BLL.Implementation
@@ -23,8 +18,9 @@ namespace Fitness.BLL.Implementation
         {
             _logger = logger;
             _userManager = userManager;
-            _repo = _unitOfWork.GetRepository<FitFamer>();
             _unitOfWork = unitOfWork;
+            _repo = _unitOfWork.GetRepository<FitFamer>();
+            
         }
         public async Task<Response<FitFamerForRegistrationDTO>> SignUpAsync(FitFamerForRegistrationDTO fitfamer)
         {
@@ -53,16 +49,21 @@ namespace Fitness.BLL.Implementation
                     FirstName = fitfamer.FirstName,
                     LastName = fitfamer.LastName,
                     Gender = fitfamer.Gender,
-                    BirthDate = fitfamer.BirthDate
+                    BirthDate = fitfamer.BirthDate,
+                    UserName = fitfamer.UserName,
+                    Email = fitfamer.Email,
                 };
                 var newFitFamer = new FitFamer
                 {
                     Height = fitfamer.Height,
                     CurrentWeight = fitfamer.CurrentWeight,
-                    GoalWeight = fitfamer.GoalWeight,
-                    ExperienceLevel = fitfamer.ExperienceLevel,
+                    ExerciseExperienceLevel = fitfamer.ExperienceLevel,
+                    WorkOutId = fitfamer.WorkOutId,
                 };
                 var createUser = await _userManager.CreateAsync(newUser, fitfamer.Password);
+
+                newFitFamer.UserId = newUser.Id;
+
                 var createFitFamer = await _repo.AddAsync(newFitFamer);
 
                 var result = new Response<FitFamerForRegistrationDTO>
@@ -139,10 +140,10 @@ namespace Fitness.BLL.Implementation
             return rowChanges > 0 ? (true, $"Task: {model.Title} was successfully created!") : (false, "Failed To save changes!");
 */
 
-        } 
+        }
         public async Task<string> DeleteAUserAsync(int id)
         {
-            FitFamer fitfamer = await _repo.GetSingleByAsync(u => u.SecondaryId == id);
+            FitFamer fitfamer = await _repo.GetSingleByAsync(u => u.Id == id);
 
             if (fitfamer is null)
             {
@@ -177,6 +178,6 @@ namespace Fitness.BLL.Implementation
             };
 
         }
-        
+
     }
 }

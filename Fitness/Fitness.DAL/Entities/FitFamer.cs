@@ -6,13 +6,11 @@ namespace Fitness.DAL.Entities
     {
         public double Height { get; set; }
         public double CurrentWeight { get; set; }
-        public double GoalWeight { get; set; }
-        public ExperienceLevel ExperienceLevel { get; set; }
+        public ExperienceLevel ExerciseExperienceLevel { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
-        public string UserGoalId { get; set; }
-        public UserGoal UserGoal { get; set; }
-        public string WorkOutId { get; set; }
+        public List<UserGoal> UserGoals { get; set; }
+        public Guid WorkOutId { get; set; }
         public WorkOut WorkOut { get; set; }
         public List<Achievement> Achievements { get; set; }
         public List<Exercise> Exercises { get; set; }
