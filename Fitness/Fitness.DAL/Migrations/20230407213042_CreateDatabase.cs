@@ -17,16 +17,16 @@ namespace Fitness.DAL.Migrations
                 name: "Achievements",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Achievements", x => x.Id);
+                    table.PrimaryKey("PK_Achievements", x => x.UniqueIdentifier);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,53 +76,34 @@ namespace Fitness.DAL.Migrations
                 name: "Exercises",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<int>(type: "int", nullable: false),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Exercises", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserGoals",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GoalType = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TargetWeight = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserGoals", x => x.Id);
+                    table.PrimaryKey("PK_Exercises", x => x.UniqueIdentifier);
                 });
 
             migrationBuilder.CreateTable(
                 name: "WorkOuts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LiveWeight = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     FitFamerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkOuts", x => x.Id);
+                    table.PrimaryKey("PK_WorkOuts", x => x.UniqueIdentifier);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,27 +123,6 @@ namespace Fitness.DAL.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Admins",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admins", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Admins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -256,23 +216,20 @@ namespace Fitness.DAL.Migrations
                 name: "FitFamers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Height = table.Column<double>(type: "float", nullable: false),
                     CurrentWeight = table.Column<double>(type: "float", nullable: false),
-                    GoalWeight = table.Column<double>(type: "float", nullable: false),
-                    ExperienceLevel = table.Column<int>(type: "int", nullable: false),
+                    ExerciseExperienceLevel = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserGoalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserGoalId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     WorkOutId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WorkOutId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
+                    WorkOutUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FitFamers", x => x.Id);
+                    table.PrimaryKey("PK_FitFamers", x => x.UniqueIdentifier);
                     table.ForeignKey(
                         name: "FK_FitFamers_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -280,16 +237,10 @@ namespace Fitness.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FitFamers_UserGoals_UserGoalId1",
-                        column: x => x.UserGoalId1,
-                        principalTable: "UserGoals",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FitFamers_WorkOuts_WorkOutId1",
-                        column: x => x.WorkOutId1,
+                        name: "FK_FitFamers_WorkOuts_WorkOutUniqueIdentifier",
+                        column: x => x.WorkOutUniqueIdentifier,
                         principalTable: "WorkOuts",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -297,33 +248,33 @@ namespace Fitness.DAL.Migrations
                 name: "WorkOutExercises",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IntensityLevel = table.Column<int>(type: "int", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
                     Sets = table.Column<int>(type: "int", nullable: false),
                     Reps = table.Column<int>(type: "int", nullable: false),
                     WorkOutId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WorkOutId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WorkOutUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExerciseId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExerciseId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
+                    ExerciseUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkOutExercises", x => x.Id);
+                    table.PrimaryKey("PK_WorkOutExercises", x => x.UniqueIdentifier);
                     table.ForeignKey(
-                        name: "FK_WorkOutExercises_Exercises_ExerciseId1",
-                        column: x => x.ExerciseId1,
+                        name: "FK_WorkOutExercises_Exercises_ExerciseUniqueIdentifier",
+                        column: x => x.ExerciseUniqueIdentifier,
                         principalTable: "Exercises",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WorkOutExercises_WorkOuts_WorkOutId1",
-                        column: x => x.WorkOutId1,
+                        name: "FK_WorkOutExercises_WorkOuts_WorkOutUniqueIdentifier",
+                        column: x => x.WorkOutUniqueIdentifier,
                         principalTable: "WorkOuts",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -331,23 +282,23 @@ namespace Fitness.DAL.Migrations
                 name: "AchievementFitFamer",
                 columns: table => new
                 {
-                    AchievementsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FitFamersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    AchievementsUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FitFamersUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AchievementFitFamer", x => new { x.AchievementsId, x.FitFamersId });
+                    table.PrimaryKey("PK_AchievementFitFamer", x => new { x.AchievementsUniqueIdentifier, x.FitFamersUniqueIdentifier });
                     table.ForeignKey(
-                        name: "FK_AchievementFitFamer_Achievements_AchievementsId",
-                        column: x => x.AchievementsId,
+                        name: "FK_AchievementFitFamer_Achievements_AchievementsUniqueIdentifier",
+                        column: x => x.AchievementsUniqueIdentifier,
                         principalTable: "Achievements",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AchievementFitFamer_FitFamers_FitFamersId",
-                        column: x => x.FitFamersId,
+                        name: "FK_AchievementFitFamer_FitFamers_FitFamersUniqueIdentifier",
+                        column: x => x.FitFamersUniqueIdentifier,
                         principalTable: "FitFamers",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -355,23 +306,23 @@ namespace Fitness.DAL.Migrations
                 name: "ExerciseFitFamer",
                 columns: table => new
                 {
-                    ExercisesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FitFamersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ExercisesUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FitFamersUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExerciseFitFamer", x => new { x.ExercisesId, x.FitFamersId });
+                    table.PrimaryKey("PK_ExerciseFitFamer", x => new { x.ExercisesUniqueIdentifier, x.FitFamersUniqueIdentifier });
                     table.ForeignKey(
-                        name: "FK_ExerciseFitFamer_Exercises_ExercisesId",
-                        column: x => x.ExercisesId,
+                        name: "FK_ExerciseFitFamer_Exercises_ExercisesUniqueIdentifier",
+                        column: x => x.ExercisesUniqueIdentifier,
                         principalTable: "Exercises",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ExerciseFitFamer_FitFamers_FitFamersId",
-                        column: x => x.FitFamersId,
+                        name: "FK_ExerciseFitFamer_FitFamers_FitFamersUniqueIdentifier",
+                        column: x => x.FitFamersUniqueIdentifier,
                         principalTable: "FitFamers",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -379,25 +330,25 @@ namespace Fitness.DAL.Migrations
                 name: "MealPlanLogs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Calories = table.Column<int>(type: "int", nullable: false),
                     MealTime = table.Column<int>(type: "int", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FitFamerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FitFamerId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
+                    FitFamerUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MealPlanLogs", x => x.Id);
+                    table.PrimaryKey("PK_MealPlanLogs", x => x.UniqueIdentifier);
                     table.ForeignKey(
-                        name: "FK_MealPlanLogs_FitFamers_FitFamerId1",
-                        column: x => x.FitFamerId1,
+                        name: "FK_MealPlanLogs_FitFamers_FitFamerUniqueIdentifier",
+                        column: x => x.FitFamerUniqueIdentifier,
                         principalTable: "FitFamers",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -405,29 +356,58 @@ namespace Fitness.DAL.Migrations
                 name: "UserAchievements",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FitFamerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FitFamerId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FitFamerUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AchievementId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AchievementId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
+                    AchievementUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserAchievements", x => x.Id);
+                    table.PrimaryKey("PK_UserAchievements", x => x.UniqueIdentifier);
                     table.ForeignKey(
-                        name: "FK_UserAchievements_Achievements_AchievementId1",
-                        column: x => x.AchievementId1,
+                        name: "FK_UserAchievements_Achievements_AchievementUniqueIdentifier",
+                        column: x => x.AchievementUniqueIdentifier,
                         principalTable: "Achievements",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserAchievements_FitFamers_FitFamerId1",
-                        column: x => x.FitFamerId1,
+                        name: "FK_UserAchievements_FitFamers_FitFamerUniqueIdentifier",
+                        column: x => x.FitFamerUniqueIdentifier,
                         principalTable: "FitFamers",
-                        principalColumn: "Id",
+                        principalColumn: "UniqueIdentifier",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserGoals",
+                columns: table => new
+                {
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GoalType = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TargetWeight = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ExpectedDailyCalorieIntake = table.Column<int>(type: "int", nullable: false),
+                    ExpectedDailyCalorieBurnt = table.Column<int>(type: "int", nullable: false),
+                    FitFamerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FitFamerUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserGoals", x => x.UniqueIdentifier);
+                    table.ForeignKey(
+                        name: "FK_UserGoals_FitFamers_FitFamerUniqueIdentifier",
+                        column: x => x.FitFamerUniqueIdentifier,
+                        principalTable: "FitFamers",
+                        principalColumn: "UniqueIdentifier",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -435,30 +415,30 @@ namespace Fitness.DAL.Migrations
                 name: "FoodStuffs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AmtConsumed = table.Column<int>(type: "int", nullable: false),
                     Calories = table.Column<int>(type: "int", nullable: false),
                     FoodClass = table.Column<int>(type: "int", nullable: false),
-                    FitFamerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    MealLogId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SecondaryId = table.Column<int>(type: "int", nullable: false),
+                    FitFamerUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    MealLogUniqueIdentifier = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FoodStuffs", x => x.Id);
+                    table.PrimaryKey("PK_FoodStuffs", x => x.UniqueIdentifier);
                     table.ForeignKey(
-                        name: "FK_FoodStuffs_FitFamers_FitFamerId",
-                        column: x => x.FitFamerId,
+                        name: "FK_FoodStuffs_FitFamers_FitFamerUniqueIdentifier",
+                        column: x => x.FitFamerUniqueIdentifier,
                         principalTable: "FitFamers",
-                        principalColumn: "Id");
+                        principalColumn: "UniqueIdentifier");
                     table.ForeignKey(
-                        name: "FK_FoodStuffs_MealPlanLogs_MealLogId",
-                        column: x => x.MealLogId,
+                        name: "FK_FoodStuffs_MealPlanLogs_MealLogUniqueIdentifier",
+                        column: x => x.MealLogUniqueIdentifier,
                         principalTable: "MealPlanLogs",
-                        principalColumn: "Id");
+                        principalColumn: "UniqueIdentifier");
                 });
 
             migrationBuilder.InsertData(
@@ -466,19 +446,15 @@ namespace Fitness.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "bb5831e4-819c-4ee6-b679-abf66bbe07d4", "b49b2d61-174d-4eca-a46c-8590cab22e08", "FitFamer", "FITFAMER" },
-                    { "caff8f0f-ea65-4659-9fd2-7311e7a091d3", "4a973e57-9fbe-4e93-b03f-9967342de8fc", "Administrator", "ADMINISTRATOR" }
+                    { "7607dbda-2c9e-4256-a65e-5f7f26169407", "e44bae40-4988-4d34-a652-a5ca25441a40", "Admin", "ADMIN" },
+                    { "b5add0da-72bb-4220-a8a2-d02ff04ef629", "fe2fe752-4a1c-4c57-a24b-5d0a51d74aa9", "FitFamer", "FITFAMER" },
+                    { "c704771d-e8f3-4500-8c99-91e27dac2189", "3f01fe12-f647-4785-b2fd-0393d6018dc7", "SuperAdmin", "SUPERADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AchievementFitFamer_FitFamersId",
+                name: "IX_AchievementFitFamer_FitFamersUniqueIdentifier",
                 table: "AchievementFitFamer",
-                column: "FitFamersId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Admins_UserId",
-                table: "Admins",
-                column: "UserId");
+                column: "FitFamersUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -520,14 +496,9 @@ namespace Fitness.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExerciseFitFamer_FitFamersId",
+                name: "IX_ExerciseFitFamer_FitFamersUniqueIdentifier",
                 table: "ExerciseFitFamer",
-                column: "FitFamersId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FitFamers_UserGoalId1",
-                table: "FitFamers",
-                column: "UserGoalId1");
+                column: "FitFamersUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FitFamers_UserId",
@@ -535,44 +506,49 @@ namespace Fitness.DAL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FitFamers_WorkOutId1",
+                name: "IX_FitFamers_WorkOutUniqueIdentifier",
                 table: "FitFamers",
-                column: "WorkOutId1");
+                column: "WorkOutUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FoodStuffs_FitFamerId",
+                name: "IX_FoodStuffs_FitFamerUniqueIdentifier",
                 table: "FoodStuffs",
-                column: "FitFamerId");
+                column: "FitFamerUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FoodStuffs_MealLogId",
+                name: "IX_FoodStuffs_MealLogUniqueIdentifier",
                 table: "FoodStuffs",
-                column: "MealLogId");
+                column: "MealLogUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MealPlanLogs_FitFamerId1",
+                name: "IX_MealPlanLogs_FitFamerUniqueIdentifier",
                 table: "MealPlanLogs",
-                column: "FitFamerId1");
+                column: "FitFamerUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAchievements_AchievementId1",
+                name: "IX_UserAchievements_AchievementUniqueIdentifier",
                 table: "UserAchievements",
-                column: "AchievementId1");
+                column: "AchievementUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAchievements_FitFamerId1",
+                name: "IX_UserAchievements_FitFamerUniqueIdentifier",
                 table: "UserAchievements",
-                column: "FitFamerId1");
+                column: "FitFamerUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkOutExercises_ExerciseId1",
-                table: "WorkOutExercises",
-                column: "ExerciseId1");
+                name: "IX_UserGoals_FitFamerUniqueIdentifier",
+                table: "UserGoals",
+                column: "FitFamerUniqueIdentifier");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkOutExercises_WorkOutId1",
+                name: "IX_WorkOutExercises_ExerciseUniqueIdentifier",
                 table: "WorkOutExercises",
-                column: "WorkOutId1");
+                column: "ExerciseUniqueIdentifier");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOutExercises_WorkOutUniqueIdentifier",
+                table: "WorkOutExercises",
+                column: "WorkOutUniqueIdentifier");
         }
 
         /// <inheritdoc />
@@ -580,9 +556,6 @@ namespace Fitness.DAL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AchievementFitFamer");
-
-            migrationBuilder.DropTable(
-                name: "Admins");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -609,6 +582,9 @@ namespace Fitness.DAL.Migrations
                 name: "UserAchievements");
 
             migrationBuilder.DropTable(
+                name: "UserGoals");
+
+            migrationBuilder.DropTable(
                 name: "WorkOutExercises");
 
             migrationBuilder.DropTable(
@@ -628,9 +604,6 @@ namespace Fitness.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "UserGoals");
 
             migrationBuilder.DropTable(
                 name: "WorkOuts");

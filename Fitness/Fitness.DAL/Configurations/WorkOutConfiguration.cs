@@ -1,11 +1,6 @@
 ﻿using Fitness.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.DAL.Configurations
 {
@@ -15,6 +10,23 @@ namespace Fitness.DAL.Configurations
         {
             builder.Property(u => u.LiveWeight)
             .HasPrecision(18, 2);
+
+            SeedWorkOut(builder);
+        }
+
+        private void SeedWorkOut(EntityTypeBuilder<WorkOut> builder)
+        {
+            var workOut = new WorkOut 
+            {
+                 UniqueIdentifier = Guid.NewGuid(),
+                 Id = 1,
+                 Name = "Aerobics",
+                 CreatedAt = DateTime.Now,
+
+            };
+
+            var values = new List<WorkOut>() {workOut };
+            builder.HasData(values);
         }
     }
 }
