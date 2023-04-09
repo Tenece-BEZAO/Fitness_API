@@ -1,8 +1,18 @@
 ﻿using Fitness.BLL.DTO;
 using Fitness.BLL.Interface;
 
+
 using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+
+
+
+using Fitness.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using System.Web;
 
 
 namespace Fitness.BLL.Implementation
@@ -20,7 +30,6 @@ namespace Fitness.BLL.Implementation
             _userManager = userManager;
             _unitOfWork = unitOfWork;
             _repo = _unitOfWork.GetRepository<FitFamer>();
-            
         }
         public async Task<Response<FitFamerForRegistrationDTO>> SignUpAsync(FitFamerForRegistrationDTO fitfamer)
         {
@@ -57,12 +66,15 @@ namespace Fitness.BLL.Implementation
                 {
                     Height = fitfamer.Height,
                     CurrentWeight = fitfamer.CurrentWeight,
+
                     ExerciseExperienceLevel = fitfamer.ExperienceLevel,
                     WorkOutId = fitfamer.WorkOutId,
                 };
                 var createUser = await _userManager.CreateAsync(newUser, fitfamer.Password);
 
                 newFitFamer.UserId = newUser.Id;
+                };
+                var createUser = await _userManager.CreateAsync(newUser, fitfamer.Password);
 
                 var createFitFamer = await _repo.AddAsync(newFitFamer);
 

@@ -7,5 +7,6 @@ namespace Fitness.BLL.Interface
         public Task<Response<FitFamerForAuthDTO>> LogInAsync(FitFamerForAuthDTO authModel);
         public Task<Response<string>> LogOutAsync();
         public Task<string> CreateToken();
+
     }
 }

@@ -5,6 +5,7 @@ using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -39,7 +40,6 @@ namespace Fitness.BLL.Implementation
                     {
                         Message = "LogIn successful",
                         IsSuccessful = true,
-                        
                     };
                 }
                 var signInResult = await _signInManager.PasswordSignInAsync(_user, authModel.Password, false, true);

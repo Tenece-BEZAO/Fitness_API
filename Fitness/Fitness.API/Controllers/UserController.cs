@@ -1,3 +1,4 @@
+
 ﻿using Fitness.BLL.DTO;
 using Fitness.BLL.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -35,5 +36,4 @@ namespace Fitness.API.Controllers
                 return BadRequest(response);
             return Ok();
         }*/
-    }
-}
+

@@ -41,5 +41,6 @@ namespace Fitness.BLL.DTO
         public ExperienceLevel ExperienceLevel { get; set; }
         public Guid WorkOutId { get; set; }
 
+
     }
 }
