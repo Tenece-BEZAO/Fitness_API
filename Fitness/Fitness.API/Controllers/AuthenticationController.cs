@@ -1,5 +1,4 @@
-
-﻿using Fitness.BLL.DTO;
+using Fitness.BLL.DTO;
 using Fitness.BLL.Interface;
 using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +53,7 @@ namespace Fitness.API.Controllers
         public ActionResult LogOut([FromForm] User user, int id)
         {
             return Ok();
+ 
         }
     }
 }

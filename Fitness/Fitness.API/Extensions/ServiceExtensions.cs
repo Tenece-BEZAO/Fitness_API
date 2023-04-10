@@ -1,4 +1,4 @@
-﻿using Fitness.BLL.Implementation;
+using Fitness.BLL.Implementation;
 using Fitness.BLL.Interface;
 using Fitness.DAL.DBContext;
 using Fitness.DAL.Entities;
@@ -73,6 +73,7 @@ namespace Fitness.API.Extensions
                 };
             });
         }
+
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();

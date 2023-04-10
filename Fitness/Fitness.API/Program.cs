@@ -20,6 +20,9 @@ namespace Fitness.API
             builder.Services.ConfigureLoggerService();
             builder.Services.AddAuthentication();
             builder.Services.ConfigureIdentity();
+
+            
+
             builder.Services.ConfigureServices();
 
             // Add services to the container.
