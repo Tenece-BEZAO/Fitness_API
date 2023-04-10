@@ -199,9 +199,6 @@ namespace Fitness.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AmtConsumed")
-                        .HasColumnType("int");
-
                     b.Property<int>("Calories")
                         .HasColumnType("int");
 
@@ -242,9 +239,6 @@ namespace Fitness.DAL.Migrations
 
                     b.Property<Guid>("MealLogID")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SecondaryId")
-                        .HasColumnType("int");
 
                     b.Property<int>("SecondaryId")
                         .HasColumnType("int");
@@ -557,15 +551,15 @@ namespace Fitness.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "39bb11f0-de49-44ec-9447-97b3b819bf6a",
-                            ConcurrencyStamp = "21252515-1390-4ad8-a763-bc6e17de8b91",
+                            Id = "1879eead-b342-4369-8aba-46198aa4600e",
+                            ConcurrencyStamp = "6fa45f2d-6df2-47e0-bd81-d7b0beb67ae7",
                             Name = "FitFamer",
                             NormalizedName = "FITFAMER"
                         },
                         new
                         {
-                            Id = "7c9fbccd-121f-443e-9d8c-cf9d721283a8",
-                            ConcurrencyStamp = "93479ae9-d735-4e32-9594-81c21c05f393",
+                            Id = "868ffeb4-cb0a-4acf-8562-55e9e89fefcf",
+                            ConcurrencyStamp = "d12963da-5f7f-4383-ab69-dfbac3a3056f",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -862,17 +856,6 @@ namespace Fitness.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Fitness.DAL.Entities.UserMealLog", b =>
-                {
-                    b.HasOne("Fitness.DAL.Entities.FitFamer", "FitFamer")
-                        .WithMany("UserMealLogs")
-                        .HasForeignKey("FitFamerId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FitFamer");
                 });
 
             modelBuilder.Entity("Fitness.DAL.Entities.FitFamer", b =>

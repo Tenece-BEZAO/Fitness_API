@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Fitness.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDb : Migration
+    public partial class CreatedDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -90,26 +90,23 @@ namespace Fitness.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:Fitness/Fitness.DAL/Migrations/20230404024117_CreateDb.cs
-                name: "MealPlanLogs",
+                name: "FoodStuffs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FoodClass = table.Column<int>(type: "int", nullable: false),
                     Calories = table.Column<int>(type: "int", nullable: false),
-                    MealTime = table.Column<int>(type: "int", nullable: false),
                     SecondaryId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MealPlanLogs", x => x.Id);
+                    table.PrimaryKey("PK_FoodStuffs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-========
->>>>>>>> af4292e792c8a538a610f787ec971ab37ec286c6:Fitness/Fitness.DAL/Migrations/20230401195850_CreateDatabase.cs
                 name: "UserGoals",
                 columns: table => new
                 {
@@ -396,50 +393,26 @@ namespace Fitness.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:Fitness/Fitness.DAL/Migrations/20230404024117_CreateDb.cs
-                name: "FoodStuffs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AmtConsumed = table.Column<int>(type: "int", nullable: false),
-                    Calories = table.Column<int>(type: "int", nullable: false),
-                    FoodClass = table.Column<int>(type: "int", nullable: false),
-                    FitFamerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-========
                 name: "MealPlanLogs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Calories = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MealTime = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FitFamerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FitFamerId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
->>>>>>>> af4292e792c8a538a610f787ec971ab37ec286c6:Fitness/Fitness.DAL/Migrations/20230401195850_CreateDatabase.cs
+                    FitFamerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SecondaryId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-<<<<<<<< HEAD:Fitness/Fitness.DAL/Migrations/20230404024117_CreateDb.cs
-                    table.PrimaryKey("PK_FoodStuffs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_FoodStuffs_FitFamers_FitFamerId",
-                        column: x => x.FitFamerId,
-                        principalTable: "FitFamers",
-                        principalColumn: "Id");
-========
                     table.PrimaryKey("PK_MealPlanLogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MealPlanLogs_FitFamers_FitFamerId1",
-                        column: x => x.FitFamerId1,
+                        name: "FK_MealPlanLogs_FitFamers_FitFamerId",
+                        column: x => x.FitFamerId,
                         principalTable: "FitFamers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
->>>>>>>> af4292e792c8a538a610f787ec971ab37ec286c6:Fitness/Fitness.DAL/Migrations/20230401195850_CreateDatabase.cs
                 });
 
             migrationBuilder.CreateTable(
@@ -473,58 +446,32 @@ namespace Fitness.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:Fitness/Fitness.DAL/Migrations/20230404024117_CreateDb.cs
-                name: "MealFoodStuffs",
-                columns: table => new
-                {
-                    MealId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FoodStuffId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MealLogId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MealFoodStuffs", x => new { x.MealId, x.FoodStuffId });
-                    table.ForeignKey(
-                        name: "FK_MealFoodStuffs_FoodStuffs_FoodStuffId",
-                        column: x => x.FoodStuffId,
-                        principalTable: "FoodStuffs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MealFoodStuffs_MealPlanLogs_MealLogId",
-                        column: x => x.MealLogId,
-                        principalTable: "MealPlanLogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-========
-                name: "FoodStuffs",
+                name: "FoodStuffsWCalories",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FoodStuffId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AmtConsumed = table.Column<int>(type: "int", nullable: false),
-                    Calories = table.Column<int>(type: "int", nullable: false),
-                    FoodClass = table.Column<int>(type: "int", nullable: false),
-                    FitFamerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    MealLogId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    MealLogID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SecondaryId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FoodStuffs", x => x.Id);
+                    table.PrimaryKey("PK_FoodStuffsWCalories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FoodStuffs_FitFamers_FitFamerId",
-                        column: x => x.FitFamerId,
-                        principalTable: "FitFamers",
-                        principalColumn: "Id");
+                        name: "FK_FoodStuffsWCalories_FoodStuffs_FoodStuffId",
+                        column: x => x.FoodStuffId,
+                        principalTable: "FoodStuffs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FoodStuffs_MealPlanLogs_MealLogId",
-                        column: x => x.MealLogId,
+                        name: "FK_FoodStuffsWCalories_MealPlanLogs_MealLogID",
+                        column: x => x.MealLogID,
                         principalTable: "MealPlanLogs",
-                        principalColumn: "Id");
->>>>>>>> af4292e792c8a538a610f787ec971ab37ec286c6:Fitness/Fitness.DAL/Migrations/20230401195850_CreateDatabase.cs
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -532,13 +479,8 @@ namespace Fitness.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:Fitness/Fitness.DAL/Migrations/20230404024117_CreateDb.cs
-                    { "4e9babf3-df22-4502-8a62-1582acb7aa68", "36128c48-4ba3-47e4-a3a2-b3eeb24436a1", "FitFamer", "FITFAMER" },
-                    { "82b1e9c1-850e-43bf-a7a3-fe417cab861b", "483d7146-c7a1-42e1-986f-52736777b1ef", "Administrator", "ADMINISTRATOR" }
-========
-                    { "bb5831e4-819c-4ee6-b679-abf66bbe07d4", "b49b2d61-174d-4eca-a46c-8590cab22e08", "FitFamer", "FITFAMER" },
-                    { "caff8f0f-ea65-4659-9fd2-7311e7a091d3", "4a973e57-9fbe-4e93-b03f-9967342de8fc", "Administrator", "ADMINISTRATOR" }
->>>>>>>> af4292e792c8a538a610f787ec971ab37ec286c6:Fitness/Fitness.DAL/Migrations/20230401195850_CreateDatabase.cs
+                    { "1879eead-b342-4369-8aba-46198aa4600e", "6fa45f2d-6df2-47e0-bd81-d7b0beb67ae7", "FitFamer", "FITFAMER" },
+                    { "868ffeb4-cb0a-4acf-8562-55e9e89fefcf", "d12963da-5f7f-4383-ab69-dfbac3a3056f", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -611,30 +553,19 @@ namespace Fitness.DAL.Migrations
                 column: "WorkOutId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FoodStuffs_FitFamerId",
-                table: "FoodStuffs",
-                column: "FitFamerId");
-
-            migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:Fitness/Fitness.DAL/Migrations/20230404024117_CreateDb.cs
-                name: "IX_MealFoodStuffs_FoodStuffId",
-                table: "MealFoodStuffs",
+                name: "IX_FoodStuffsWCalories_FoodStuffId",
+                table: "FoodStuffsWCalories",
                 column: "FoodStuffId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MealFoodStuffs_MealLogId",
-                table: "MealFoodStuffs",
-                column: "MealLogId");
-========
-                name: "IX_FoodStuffs_MealLogId",
-                table: "FoodStuffs",
-                column: "MealLogId");
+                name: "IX_FoodStuffsWCalories_MealLogID",
+                table: "FoodStuffsWCalories",
+                column: "MealLogID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MealPlanLogs_FitFamerId1",
+                name: "IX_MealPlanLogs_FitFamerId",
                 table: "MealPlanLogs",
-                column: "FitFamerId1");
->>>>>>>> af4292e792c8a538a610f787ec971ab37ec286c6:Fitness/Fitness.DAL/Migrations/20230401195850_CreateDatabase.cs
+                column: "FitFamerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAchievements_AchievementId1",
@@ -685,11 +616,7 @@ namespace Fitness.DAL.Migrations
                 name: "ExerciseFitFamer");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:Fitness/Fitness.DAL/Migrations/20230404024117_CreateDb.cs
-                name: "MealFoodStuffs");
-========
-                name: "FoodStuffs");
->>>>>>>> af4292e792c8a538a610f787ec971ab37ec286c6:Fitness/Fitness.DAL/Migrations/20230401195850_CreateDatabase.cs
+                name: "FoodStuffsWCalories");
 
             migrationBuilder.DropTable(
                 name: "UserAchievements");
@@ -701,18 +628,12 @@ namespace Fitness.DAL.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:Fitness/Fitness.DAL/Migrations/20230404024117_CreateDb.cs
                 name: "FoodStuffs");
 
             migrationBuilder.DropTable(
                 name: "MealPlanLogs");
 
             migrationBuilder.DropTable(
-========
-                name: "MealPlanLogs");
-
-            migrationBuilder.DropTable(
->>>>>>>> af4292e792c8a538a610f787ec971ab37ec286c6:Fitness/Fitness.DAL/Migrations/20230401195850_CreateDatabase.cs
                 name: "Achievements");
 
             migrationBuilder.DropTable(
