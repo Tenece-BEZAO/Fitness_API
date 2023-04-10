@@ -84,6 +84,12 @@ namespace Fitness.API.Extensions
             });
 
         }
+        public static void ConfigureServices(this IServiceCollection services)
+        {
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork<FitnessDbContext>>();
+        }
     }
 }
 

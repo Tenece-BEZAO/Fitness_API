@@ -11,13 +11,18 @@ namespace Fitness.DAL.Configurations
             builder.HasData(
             new IdentityRole
             {
+                Name = "SuperAdmin",
+                NormalizedName = "SUPERADMIN"
+            },
+            new IdentityRole
+            {
                 Name = "FitFamer",
                 NormalizedName = "FITFAMER"
             },
             new IdentityRole
             {
-                Name = "Administrator",
-                NormalizedName = "ADMINISTRATOR"
+                Name = "Admin",
+                NormalizedName = "ADMIN"
 
             });
         }
