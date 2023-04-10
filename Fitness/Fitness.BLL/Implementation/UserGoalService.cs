@@ -1,45 +1,33 @@
 ﻿using Fitness.BLL.DTO;
 using Fitness.BLL.Interface;
 using Fitness.DAL.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.BLL.Implementation
 {
     public class UserGoalService : IUserGoalService
     {
-        private readonly UserManager<User> _userManager;
         private readonly IRepository<FitFamer> _repo;
-        private readonly IRepository<User> _userRepo;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserGoalService(UserManager<User> userManager, IRepository<FitFamer> repo, IRepository<User> userRepo, IUnitOfWork unitOfWork)
+        public UserGoalService(IUnitOfWork unitOfWork)
         {
-            _userRepo = userRepo;
-            _userManager = userManager;
-            _repo = repo;
             _unitOfWork = unitOfWork;
+            _repo = _unitOfWork.GetRepository<FitFamer>();
 
         }
-        public async Task<(bool successful, string msg)> AddOrUpdateAsync(AddOrUpdateUserGoalDTO model)
+        public async Task<Response<AddOrUpdateUserGoalDTO>> AddOrUpdateAsync(AddOrUpdateUserGoalDTO model)
         {
             FitFamer fitFamer = await _repo.GetSingleByAsync(f => f.Id == model.FitFamerId);
 
             if (fitFamer is null)
             {
-                return (false, $"User with id:{model.FitFamerId} wasn't found");
+                return new Response<AddOrUpdateUserGoalDTO> { IsSuccessful = false, Message = $"User with id:{model.FitFamerId} wasn't found" };
             }
 
             UserGoal userGoal = fitFamer.UserGoals.SingleOrDefault(u => u.Id == model.UserGoalID);
 
             if (userGoal is not null)
             {
-
                 userGoal.UpdatedAt = DateTime.Now;
                 userGoal.StartDate = model.StartDate;
                 userGoal.Status = model.Status;
@@ -50,10 +38,11 @@ namespace Fitness.BLL.Implementation
                 userGoal.GoalType = model.GoalType;
 
                 await _unitOfWork.SaveChangesAsync();
-                return (true, "Update Successful!");
+                return new Response<AddOrUpdateUserGoalDTO> { IsSuccessful = true, Message = "Update Successful!" };
             }
             else
             {
+
                 userGoal.CreatedAt = DateTime.Now;
                 userGoal.StartDate = model.StartDate;
                 userGoal.Status = model.Status;
@@ -65,18 +54,31 @@ namespace Fitness.BLL.Implementation
             }
             var rowChanges = await _unitOfWork.SaveChangesAsync();
 
-            return rowChanges > 0 ? (true, $"Task: {model.FitFamerId} was successfully created!") : (false, "Failed To save changes!");
+            return rowChanges > 0 ? new Response<AddOrUpdateUserGoalDTO>
+            {
+                IsSuccessful = true,
+                Message = $"Task: {model.FitFamerId} was successfully created!"
+            } :
+            new Response<AddOrUpdateUserGoalDTO>
+            {
+                IsSuccessful = false,
+                Message = "Failed To save changes!"
+            };
 
         }
 
-        public async Task<(bool successful, string msg)> DeleteAsync(FindUserGoalDTO model)
+        public async Task<Response<FindUserGoalDTO>> DeleteAsync(FindUserGoalDTO model)
         {
-            // User user = ToDoListDbContext.GetUsersWithToDos().SingleOrDefault(u => u.Id == model.UserId);
             FitFamer fitfamer = await _repo.GetSingleByAsync(u => u.Id == model.FitFamerId);
 
             if (fitfamer is null)
             {
-                return (false, $"User with id:{model.FitFamerId} wasn't found");
+                return new Response<FindUserGoalDTO>
+                {
+                    Message = $"User with id:{model.FitFamerId} wasn't found",
+                    IsSuccessful = false,
+
+                };
             }
 
             UserGoal userGoal = fitfamer.UserGoals.FirstOrDefault(t => t.Id == model.UserGoalId);
@@ -84,43 +86,53 @@ namespace Fitness.BLL.Implementation
             {
                 fitfamer.UserGoals.Remove(userGoal);
 
-                return await _unitOfWork.SaveChangesAsync() > 0 ? (true, $"Task with Title:{userGoal.GoalType} was deleted") : (false, $"Delete Failed");
+                return await _unitOfWork.SaveChangesAsync() > 0 ? new Response<FindUserGoalDTO>
+                {
+                    Message = $"Task with Title:{userGoal.GoalType} was deleted",
+                    IsSuccessful = true
+                } :
+                new Response<FindUserGoalDTO>
+                {
+                    IsSuccessful = false,
+                    Message = $"Delete Failed"
+                };
             }
-            return (false, $"Task with id:{model.UserGoalId} was not found");
+            return new Response<FindUserGoalDTO>
+            {
+                IsSuccessful = false,
+                Message = $"Task with id:{model.UserGoalId} was not found"
+            };
         }
 
 
-        /*public (Todo to, string msg) GetTask(int userId, int taskId)
+        public async Task<Response<UserGoal>> GetUserGoalAsync(int fitfamerId, int userGoalId)
         {
-            // User user = ToDoListDbContext.GetUsersWithToDos().SingleOrDefault(u => u.Id == model.UserId);
-            User user = null;
+            FitFamer fitfamer = await _repo.GetSingleByAsync(u => u.Id == fitfamerId);
 
-            if (user == null)
+
+            if (fitfamer is null)
             {
-                return (null, "User not found");
+                return new Response<UserGoal> { Message = "User not found" };
             }
 
-            Todo todo = user.TodoList.FirstOrDefault(t => t.Id == taskId);
+            UserGoal goal = fitfamer.UserGoals.FirstOrDefault(t => t.Id == userGoalId);
 
-            if (todo == null)
+            if (goal is null)
             {
-                return (null, "Task not found");
+                return new Response<UserGoal> { Message = "Goal not found" };
             }
 
-            return (todo, "");
+            return new Response<UserGoal> { Result = goal };
 
         }
 
-        public IEnumerable<Todo> GetTodoList()
+        public IEnumerable<UserGoal> GetUserGoalListAsync()
         {
-            List<Todo> todoList = new List<Todo>();
+            List<UserGoal> goalList = new List<UserGoal>();
 
+            var goals = goalList;
 
-            // var todos = ToDoListDbContext.GetUsersWithToDos().SelectMany(t => t.TodoList).ToList();
-            var todos = todoList;
-
-
-            return todos;
-        }*/
+            return goals;
+        }
     }
 }

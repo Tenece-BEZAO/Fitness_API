@@ -1,6 +1,5 @@
 ﻿using Fitness.BLL.DTO;
 using Fitness.BLL.Interface;
-using Fitness.DAL.DBContext;
 using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 
@@ -13,14 +12,14 @@ namespace Fitness.BLL.Implementation
         private readonly IRepository<FitFamer> _repo;
         private readonly IRepository<User> _userRepo;
         private readonly IUnitOfWork _unitOfWork;
-        
+
         public UserService(UserManager<User> userManager, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _unitOfWork = unitOfWork;
             _repo = _unitOfWork.GetRepository<FitFamer>();
-            
-            
+
+
         }
         public async Task<Response<FitFamerForRegistrationDTO>> SignUpAsync(FitFamerForRegistrationDTO fitfamer)
         {
@@ -190,7 +189,7 @@ namespace Fitness.BLL.Implementation
                 {
                     Message = $"{username} Found",
                     IsSuccessful = true,
-                    
+
                 };
             }
             return new Response<FitFamerForRegistrationDTO>
