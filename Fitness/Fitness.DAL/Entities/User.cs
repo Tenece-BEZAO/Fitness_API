@@ -11,3 +11,4 @@ namespace Fitness.DAL.Entities
         public string Gender { get; set; }
     }
 }
+

@@ -37,7 +37,7 @@ namespace Fitness.DAL.DBContext
 
         }
 
-        public DbSet<Admin> Admins { get; set; }
+        
         public DbSet<FitFamer> FitFamers { get; set; }
         public DbSet<Achievement> Achievements { get; set; }
         public DbSet<Exercise> Exercises { get; set; }

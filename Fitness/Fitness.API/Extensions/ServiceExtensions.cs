@@ -1,4 +1,5 @@
-﻿using Fitness.BLL.Interface;
+using Fitness.BLL.Implementation;
+using Fitness.BLL.Interface;
 using Fitness.DAL.DBContext;
 using Fitness.DAL.Entities;
 using LoggerServices;
@@ -71,6 +72,13 @@ namespace Fitness.API.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });
+        }
+
+        public static void ConfigureServices(this IServiceCollection services)
+        {
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork<FitnessDbContext>>();
         }
     }
 }
