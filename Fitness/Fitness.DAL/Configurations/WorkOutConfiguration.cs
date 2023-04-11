@@ -20,7 +20,7 @@ namespace Fitness.DAL.Configurations
             {
                  UniqueIdentifier = Guid.NewGuid(),
                  Id = 1,
-                 Name = "Aerobics",
+                 //Name = "Aerobics",
                  CreatedAt = DateTime.Now,
 
             };
