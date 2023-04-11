@@ -6,20 +6,11 @@ using System.Threading.Tasks;
 
 namespace Fitness.BLL.DTO
 {
-<<<<<<<< HEAD:Fitness/Fitness.BLL/DTO/FitFamerForUpdateDTO.cs
-    public class FitFamerForUpdateDTO
-|||||||| cb6eb68:Fitness/Fitness.BLL/DTO/UserVM.cs
-     class User
-========
-    public class FindUserGoalDTO
->>>>>>>> origin/uzo/UserGoal:Fitness/Fitness.BLL/DTO/FindUserGoalDTO.cs
-    {
-<<<<<<<< HEAD:Fitness/Fitness.BLL/DTO/FitFamerForUpdateDTO.cs
 
-|||||||| cb6eb68:Fitness/Fitness.BLL/DTO/UserVM.cs
-========
+    public class FindUserGoalDTO
+    {
         public int UserGoalId { get; set; }
         public int FitFamerId { get; set; }
->>>>>>>> origin/uzo/UserGoal:Fitness/Fitness.BLL/DTO/FindUserGoalDTO.cs
+
     }
 }
