@@ -1,4 +1,4 @@
-using Fitness.BLL.Implementation;
+﻿using Fitness.BLL.Implementation;
 using Fitness.BLL.Interface;
 using Fitness.DAL.DBContext;
 using Fitness.DAL.Entities;
@@ -61,7 +61,13 @@ namespace Fitness.API.Extensions
             services.AddTransient<IMealLogService, MealLogService>();
             services.AddScoped<IAchievementService, AchievementService>();
             services.AddScoped<IExerciseService, ExerciseService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserGoalService, UserGoalService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork<FitnessDbContext>>();
+            
         }
+        
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("JwtSettings");
@@ -84,15 +90,10 @@ namespace Fitness.API.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });
-
         }
-
         public static void ConfigureServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork<FitnessDbContext>>();
+           
         }
     }
 }
-
