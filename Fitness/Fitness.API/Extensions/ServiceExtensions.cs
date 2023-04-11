@@ -59,6 +59,8 @@ namespace Fitness.API.Extensions
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFoodStuffService, FoodStuffService>();
             services.AddTransient<IMealLogService, MealLogService>();
+            services.AddScoped<IAchievementService, AchievementService>();
+            services.AddScoped<IExerciseService, ExerciseService>();
         }
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {

@@ -14,6 +14,8 @@
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="7.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,4 +25,8 @@
     <ProjectReference Include="..\Fitness.Shared\Fitness.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="Microsoft.AspNetCore.JsonPatch" />
+  </ItemGroup>
 </Project>

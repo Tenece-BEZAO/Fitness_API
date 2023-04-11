@@ -10,11 +10,16 @@
     <Compile Remove="Implementations\**" />
     <EmbeddedResource Remove="Implementations\**" />
     <None Remove="Implementations\**" />
+    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="MappingProfile\" />
+    <None Remove="Microsoft.AspNetCore.JsonPatch" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="7.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +28,9 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MappingProfile\" />
+  </ItemGroup>
 </Project>

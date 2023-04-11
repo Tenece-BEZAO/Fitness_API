@@ -1,3 +1,4 @@
+using System.Reflection;
 using Fitness.API.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.OpenApi.Models;
@@ -31,6 +32,7 @@ namespace Fitness.API
                 .AddApplicationPart(typeof(FitnessApp.Presentation.AssemblyReference).Assembly);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddAutoMapper(Assembly.Load("Fitness.BLL"));
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
