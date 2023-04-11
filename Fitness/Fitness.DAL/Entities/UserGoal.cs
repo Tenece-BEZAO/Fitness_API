@@ -11,7 +11,7 @@ namespace Fitness.DAL.Entities
         public Status Status { get; set; }
         public int ExpectedDailyCalorieIntake { get; set; }
         public int ExpectedDailyCalorieBurnt { get; set; }
-        public string FitFamerId { get; set; }
+        public Guid FitFamerId { get; set; }
         public FitFamer FitFamer { get; set;}
     }
 }
