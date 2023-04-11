@@ -20,16 +20,11 @@ namespace Fitness.API
             builder.Services.ConfigureLoggerService();
             builder.Services.AddAuthentication();
             builder.Services.ConfigureIdentity();
-
-            
-
             builder.Services.ConfigureServices();
 
             // Add services to the container.
 
-            builder.Services.AddControllers()
-                .AddApplicationPart(typeof(FitnessApp.Presentation.AssemblyReference).Assembly);
-
+            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
@@ -64,8 +59,6 @@ namespace Fitness.API
                 });
             });
 
-            builder.Services.AddSwaggerGen();
-            builder.Services.RegisterServices();
 
             var app = builder.Build();
 

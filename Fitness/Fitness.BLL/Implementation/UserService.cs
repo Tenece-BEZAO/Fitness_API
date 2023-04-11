@@ -1,36 +1,24 @@
-using Fitness.BLL.DTO;
+﻿using Fitness.BLL.DTO;
 using Fitness.BLL.Interface;
-using Fitness.DAL.DBContext;
 using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using System.Web;
-
-
-
 
 
 namespace Fitness.BLL.Implementation
 {
     public class UserService : IUserService
     {
-        private readonly ILoggerManager _logger;
         private readonly UserManager<User> _userManager;
         private readonly IRepository<FitFamer> _repo;
+        private readonly IRepository<User> _userRepo;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(ILoggerManager logger, UserManager<User> userManager, IUnitOfWork unitOfWork)
+        public UserService(UserManager<User> userManager, IUnitOfWork unitOfWork)
         {
-            _logger = logger;
             _userManager = userManager;
-
-            _repo = _unitOfWork.GetRepository<FitFamer>();
-            _unitOfWork = unitOfWork;
-
             _unitOfWork = unitOfWork;
             _repo = _unitOfWork.GetRepository<FitFamer>();
+
 
         }
         public async Task<Response<FitFamerForRegistrationDTO>> SignUpAsync(FitFamerForRegistrationDTO fitfamer)
@@ -60,34 +48,20 @@ namespace Fitness.BLL.Implementation
                     FirstName = fitfamer.FirstName,
                     LastName = fitfamer.LastName,
                     Gender = fitfamer.Gender,
-
-                    BirthDate = fitfamer.BirthDate
-
                     BirthDate = fitfamer.BirthDate,
                     UserName = fitfamer.UserName,
                     Email = fitfamer.Email,
-
                 };
                 var newFitFamer = new FitFamer
                 {
                     Height = fitfamer.Height,
                     CurrentWeight = fitfamer.CurrentWeight,
-
-                    GoalWeight = fitfamer.GoalWeight,
-                    ExperienceLevel = fitfamer.ExperienceLevel,
-                };
-                var createUser = await _userManager.CreateAsync(newUser, fitfamer.Password);
-
-
                     ExerciseExperienceLevel = fitfamer.ExperienceLevel,
                     WorkOutId = fitfamer.WorkOutId,
                 };
                 var createUser = await _userManager.CreateAsync(newUser, fitfamer.Password);
 
                 newFitFamer.UserId = newUser.Id;
-                };
-                var createUser = await _userManager.CreateAsync(newUser, fitfamer.Password);
-
 
                 var createFitFamer = await _repo.AddAsync(newFitFamer);
 
@@ -103,7 +77,7 @@ namespace Fitness.BLL.Implementation
                     Message = "There is an issue with your sign up",
                     IsSuccessful = false,
                     Result = fitfamer
-                }; ;
+                };
             }
             catch (Exception e)
             {
@@ -115,135 +89,107 @@ namespace Fitness.BLL.Implementation
                     Result = fitfamer
                 };
             }
-
-
         }
 
-        public void UpdateAUserAsync()
+        public async Task<Response<FitFamerForUpdateDTO>> UpdateAUserAsync(FitFamerForUpdateDTO fitfamer)
         {
-            /*User user = await _userRepo.GetSingleByAsync(u => u.Id == model.UserId, include: u => u.Include(x => x.TodoList), tracking: true);
-
-
-            if (user == null)
-            {
-                return (false, $"User with id:{model.UserId} wasn't found");
-            }
-
-            Todo task = user.TodoList.SingleOrDefault(t => t.Id == model.TaskId);
-
-
-            if (task != null)
-            {
-
-                _mapper.Map(model, task);
-
-                //
-                // task.Title = model.Title;
-                // task.Description = model.Description;
-                // task.Priority = (model.Priority ?? Priority.Normal);
-                // task.DueDate = model.DueDate;
-
-                await _unitOfWork.SaveChangesAsync();
-                return (true, "Update Successful!");
-            }
-
-            // var newTask = _mapper.Map<AddOrUpdateTaskVM,Todo>(model);
-            var newTask = _mapper.Map<Todo>(model);
-
-            // var newTask = new Todo
-            // {
-            //  
-            //     Title = model.Title,
-            //     Description = model.Description,
-            //     Priority = model.Priority ?? Priority.Normal,
-            //     DueDate = model.DueDate,
-            //
-            // };
-            user.TodoList.Add(newTask);
-
-            var rowChanges = await _unitOfWork.SaveChangesAsync();
-
-            return rowChanges > 0 ? (true, $"Task: {model.Title} was successfully created!") : (false, "Failed To save changes!");
-*/
-
-        } 
-        public async Task<string> DeleteAUserAsync(int id)
-        {
-            FitFamer fitfamer = await _repo.GetSingleByAsync(u => u.SecondaryId == id);
-
-
-            if (user == null)
-            {
-                return (false, $"User with id:{model.UserId} wasn't found");
-            }
-
-            Todo task = user.TodoList.SingleOrDefault(t => t.Id == model.TaskId);
-
-
-            if (task != null)
-            {
-
-                _mapper.Map(model, task);
-
-                //
-                // task.Title = model.Title;
-                // task.Description = model.Description;
-                // task.Priority = (model.Priority ?? Priority.Normal);
-                // task.DueDate = model.DueDate;
-
-                await _unitOfWork.SaveChangesAsync();
-                return (true, "Update Successful!");
-            }
-
-            // var newTask = _mapper.Map<AddOrUpdateTaskVM,Todo>(model);
-            var newTask = _mapper.Map<Todo>(model);
-
-            // var newTask = new Todo
-            // {
-            //  
-            //     Title = model.Title,
-            //     Description = model.Description,
-            //     Priority = model.Priority ?? Priority.Normal,
-            //     DueDate = model.DueDate,
-            //
-            // };
-            user.TodoList.Add(newTask);
-
-            var rowChanges = await _unitOfWork.SaveChangesAsync();
-
-            return rowChanges > 0 ? (true, $"Task: {model.Title} was successfully created!") : (false, "Failed To save changes!");
-*/
-
-        }
-        public async Task<string> DeleteAUserAsync(int id)
-        {
-            FitFamer fitfamer = await _repo.GetSingleByAsync(u => u.Id == id);
-
-
             if (fitfamer is null)
             {
-                return ($"User with id:{id} wasn't found");
+                return new Response<FitFamerForUpdateDTO>
+                {
+                    Message = "No Update Made",
+                    IsSuccessful = false,
+                };
+            }
+            try
+            {
+                var existingUser = await _userManager.FindByEmailAsync(fitfamer.Email);
+                if (existingUser is null)
+                {
+                    return new Response<FitFamerForUpdateDTO>
+                    {
+                        Message = "User does not exist. Please register an account",
+                        IsSuccessful = false,
+                    };
+                }
+
+                var newUser = new User
+                {
+                    FirstName = fitfamer.FirstName,
+                    LastName = fitfamer.LastName,
+                    UserName = fitfamer.UserName,
+                    Email = fitfamer.Email,
+                };
+                var newFitFamer = new FitFamer
+                {
+                    Height = fitfamer.Height,
+                    CurrentWeight = fitfamer.CurrentWeight,
+                    ExerciseExperienceLevel = fitfamer.ExperienceLevel,
+                };
+                var updateUser = await _userManager.UpdateAsync(newUser);
+
+                newFitFamer.UserId = newUser.Id;
+
+                var updateFitFamer = await _repo.UpdateAsync(newFitFamer);
+
+                var result = new Response<FitFamerForUpdateDTO>
+                {
+                    Message = "Successful",
+                    IsSuccessful = true,
+                    Result = fitfamer
+                };
+
+                return updateUser is not null && updateFitFamer is not null ? result : new Response<FitFamerForUpdateDTO>
+                {
+                    Message = "Up to Date",
+                    IsSuccessful = false,
+                    Result = fitfamer
+                };
+            }
+            catch (Exception e)
+            {
+
+                return new Response<FitFamerForUpdateDTO>
+                {
+                    Message = e.Message,
+                    IsSuccessful = false,
+                    Result = fitfamer
+                };
             }
 
-            await _repo.DeleteByIdAsync(id);
-            return "Successfully deleted";
+        }
+        public async Task<Response<FitFamerForAuthDTO>> DeleteAUserAsync(FitFamerForAuthDTO fitfamer)
+        {
+            var user = await _userRepo.GetSingleByAsync(u => u.Email == fitfamer.Email && u.PasswordHash == fitfamer.Password);
+
+            if (user is not null)
+            {
+                await _userRepo.DeleteAsync(user);
+                return new Response<FitFamerForAuthDTO>
+                {
+                    Message = "Account has been successfully deleted",
+                    IsSuccessful = true,
+                };
+            }
+
+            return new Response<FitFamerForAuthDTO>
+            {
+                Message = "Delete Failed",
+                IsSuccessful = false,
+            };
         }
 
-        public async Task<Response<FitFamerForRegistrationDTO>> GetAUserAsync(string id)
+        public async Task<Response<FitFamerForRegistrationDTO>> GetAUserAsync(string username)
         {
-            var user = _userManager.FindByIdAsync(id);
+            var user = _userManager.FindByNameAsync(username);
 
             if (user is not null)
             {
                 return new Response<FitFamerForRegistrationDTO>
                 {
-                    Message = "User Found",
+                    Message = $"{username} Found",
                     IsSuccessful = true,
-                    Result = new FitFamerForRegistrationDTO
-                    {
-                        FirstName = user.Result.FirstName,
-                        LastName = user.Result.LastName,
-                    }
+
                 };
             }
             return new Response<FitFamerForRegistrationDTO>
@@ -253,9 +199,6 @@ namespace Fitness.BLL.Implementation
             };
 
         }
-
-        
-
 
     }
 }
