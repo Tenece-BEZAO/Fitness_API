@@ -57,7 +57,7 @@ namespace Fitness.BLL.Implementation
                     Height = fitfamer.Height,
                     CurrentWeight = fitfamer.CurrentWeight,
                     ExerciseExperienceLevel = fitfamer.ExperienceLevel,
-                    WorkOutId = fitfamer.WorkOutId,
+                   // WorkOutId = fitfamer.WorkOutId,
                 };
                 var createUser = await _userManager.CreateAsync(newUser, fitfamer.Password);
 

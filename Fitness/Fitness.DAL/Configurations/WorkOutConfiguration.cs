@@ -11,7 +11,7 @@ namespace Fitness.DAL.Configurations
             builder.Property(u => u.LiveWeight)
             .HasPrecision(18, 2);
 
-            SeedWorkOut(builder);
+            //SeedWorkOut(builder);
         }
 
         private void SeedWorkOut(EntityTypeBuilder<WorkOut> builder)

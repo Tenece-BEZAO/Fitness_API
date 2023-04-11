@@ -17,7 +17,7 @@ namespace Fitness.BLL.Implementation
         }
         public async Task<Response<AddOrUpdateUserGoalDTO>> AddOrUpdateAsync(AddOrUpdateUserGoalDTO model)
         {
-            FitFamer fitFamer = await _repo.GetSingleByAsync(f => f.Id == model.FitFamerId);
+            FitFamer fitFamer = await _repo.GetSingleByAsync(f => f.UniqueIdentifier == model.FitFamerId);
 
             if (fitFamer is null)
             {

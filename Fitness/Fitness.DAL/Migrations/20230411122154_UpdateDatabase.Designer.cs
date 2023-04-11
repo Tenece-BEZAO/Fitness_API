@@ -4,6 +4,7 @@ using Fitness.DAL.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness.DAL.Migrations
 {
     [DbContext(typeof(FitnessDbContext))]
-    partial class FitnessDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230411122154_UpdateDatabase")]
+    partial class UpdateDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -464,9 +467,7 @@ namespace Fitness.DAL.Migrations
 
                     b.HasIndex("UserId1");
 
-
                     b.ToTable("WorkOuts");
-
                 });
 
             modelBuilder.Entity("Fitness.DAL.Entities.WorkOutExercise", b =>
@@ -551,28 +552,22 @@ namespace Fitness.DAL.Migrations
                     b.HasData(
                         new
                         {
-
                             Id = "ecaf48ee-9527-4dd4-9b93-cc2ca17757f6",
                             ConcurrencyStamp = "8b0b6d22-682e-499c-8c79-d8f45ee8e5a4",
-
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
-
                             Id = "956ed2ed-27d1-4ce4-8456-076b91b9152a",
                             ConcurrencyStamp = "59d5c20c-fe1d-4474-b8a3-45553c5ed1d3",
-
                             Name = "FitFamer",
                             NormalizedName = "FITFAMER"
                         },
                         new
                         {
-
                             Id = "823b1e7f-72bf-45ff-9b2b-02839fa50e77",
                             ConcurrencyStamp = "1c781c1d-4dd5-46ad-9c82-155526ce410e",
-
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -744,10 +739,8 @@ namespace Fitness.DAL.Migrations
                     b.Navigation("MealLog");
                 });
 
-
             modelBuilder.Entity("Fitness.DAL.Entities.MealLog", b =>
                 {
-
                     b.HasOne("Fitness.DAL.Entities.FitFamer", "FitFamer")
                         .WithMany("MealLogs")
                         .HasForeignKey("FitFamerId")
@@ -878,8 +871,6 @@ namespace Fitness.DAL.Migrations
             modelBuilder.Entity("Fitness.DAL.Entities.MealLog", b =>
                 {
                     b.Navigation("FoodStuffWCalories");
-
-
                 });
 #pragma warning restore 612, 618
         }

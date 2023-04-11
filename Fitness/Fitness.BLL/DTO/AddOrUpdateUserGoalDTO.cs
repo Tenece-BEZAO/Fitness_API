@@ -18,7 +18,7 @@ namespace Fitness.BLL.DTO
         public Status Status { get; set; }
         public int ExpectedDailyCalorieIntake { get; set; }
         public int ExpectedDailyCalorieBurnt { get; set; }
-        public int FitFamerId { get; set; }
+        public Guid FitFamerId { get; set; }
         public int UserGoalID { get; set; }
         [EmailAddress]
         public string Email { get; set;}

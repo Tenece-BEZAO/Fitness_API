@@ -39,7 +39,6 @@ namespace Fitness.BLL.DTO
         public double CurrentWeight { get; set; }
         [Required(ErrorMessage = "Goal Weight is required")]
         public ExperienceLevel ExperienceLevel { get; set; }
-        public Guid WorkOutId { get; set; }
 
     }
 }
