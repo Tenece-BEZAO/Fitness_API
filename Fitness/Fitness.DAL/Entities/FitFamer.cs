@@ -14,8 +14,8 @@ namespace Fitness.DAL.Entities
         public WorkOut WorkOut { get; set; }
         public List<Achievement> Achievements { get; set; }
         public List<Exercise> Exercises { get; set; }
-        public List<FoodStuff> FoodStuff { get; set; }
-        public List<UserMealLog> UserMealLogs { get; set; }
+        public List<MealLog> MealLogs { get; set; }
+        //public List<UserMealLog> UserMealLogs { get; set; }
 
 
     }

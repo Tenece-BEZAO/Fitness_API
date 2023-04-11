@@ -50,6 +50,16 @@ namespace Fitness.API.Extensions
             services.AddDbContext<FitnessDbContext>(opts => opts.UseSqlServer(configuration.GetConnectionString("DefaultConn")
          ));
         }
+
+        public static void RegisterServices(this IServiceCollection services)
+        {
+            services.AddTransient<IServiceFactory, ServiceFactory>();
+            services.AddTransient<DbContext, FitnessDbContext>();
+            services.AddTransient<IUnitOfWork, UnitOfWork<FitnessDbContext>>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IFoodStuffService, FoodStuffService>();
+            services.AddTransient<IMealLogService, MealLogService>();
+        }
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("JwtSettings");
@@ -72,6 +82,7 @@ namespace Fitness.API.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });
+
         }
 
         public static void ConfigureServices(this IServiceCollection services)
@@ -82,3 +93,4 @@ namespace Fitness.API.Extensions
         }
     }
 }
+
