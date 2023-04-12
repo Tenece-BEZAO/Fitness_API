@@ -1,4 +1,5 @@
-﻿using Fitness.DAL.Configurations;
+﻿using System.Reflection.Emit;
+using Fitness.DAL.Configurations;
 using Fitness.DAL.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,41 @@ namespace Fitness.DAL.DBContext
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
 
-                       
+            base.OnModelCreating(builder);
+            builder.Entity<UserAchievement>()
+                .HasKey(ua => new { ua.FitFamerId, ua.AchievementId });
+
+
+            builder.Entity<UserAchievement>()
+                .HasOne(ua => ua.FitFamer)
+                .WithMany(f => f.UserAchievements)
+                .HasForeignKey(ua => ua.FitFamerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<UserAchievement>()
+                .HasOne(ua => ua.Achievement)
+                .WithMany(a => a.UserAchievements)
+                .HasForeignKey(ua => ua.AchievementId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            builder.Entity<WorkOutExercise>()
+       .HasKey(we => new { we.WorkOutId, we.ExerciseId });
+
+            builder.Entity<WorkOutExercise>()
+                .HasOne(we => we.WorkOut)
+                .WithMany(w => w.WorkOutExercises)
+                .HasForeignKey(we => we.WorkOutId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<WorkOutExercise>()
+                .HasOne(we => we.Exercise)
+                .WithMany(e => e.WorkOutExercises)
+                .HasForeignKey(we => we.ExerciseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
             builder.ApplyConfiguration(new RoleConfiguration());
 
             builder.ApplyConfiguration(new UserGoalConfiguration());

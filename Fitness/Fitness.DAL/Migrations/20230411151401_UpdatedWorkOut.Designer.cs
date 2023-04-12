@@ -4,6 +4,7 @@ using Fitness.DAL.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness.DAL.Migrations
 {
     [DbContext(typeof(FitnessDbContext))]
-    partial class FitnessDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230411151401_UpdatedWorkOut")]
+    partial class UpdatedWorkOut
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,36 @@ namespace Fitness.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AchievementFitFamer", b =>
+                {
+                    b.Property<Guid>("AchievementsUniqueIdentifier")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FitFamersUniqueIdentifier")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AchievementsUniqueIdentifier", "FitFamersUniqueIdentifier");
+
+                    b.HasIndex("FitFamersUniqueIdentifier");
+
+                    b.ToTable("AchievementFitFamer");
+                });
+
+            modelBuilder.Entity("ExerciseFitFamer", b =>
+                {
+                    b.Property<Guid>("ExercisesUniqueIdentifier")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FitFamersUniqueIdentifier")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ExercisesUniqueIdentifier", "FitFamersUniqueIdentifier");
+
+                    b.HasIndex("FitFamersUniqueIdentifier");
+
+                    b.ToTable("ExerciseFitFamer");
+                });
 
             modelBuilder.Entity("Fitness.DAL.Entities.Achievement", b =>
                 {
@@ -313,14 +346,22 @@ namespace Fitness.DAL.Migrations
 
             modelBuilder.Entity("Fitness.DAL.Entities.UserAchievement", b =>
                 {
-                    b.Property<Guid>("FitFamerId")
+                    b.Property<Guid>("UniqueIdentifier")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AchievementId")
+                    b.Property<string>("AchievementId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AchievementUniqueIdentifier")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("FitFamerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -328,16 +369,14 @@ namespace Fitness.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("UniqueIdentifier")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("FitFamerId", "AchievementId");
+                    b.HasKey("UniqueIdentifier");
 
-                    b.HasIndex("AchievementId");
+                    b.HasIndex("AchievementUniqueIdentifier");
+
+                    b.HasIndex("FitFamerId");
 
                     b.ToTable("UserAchievements");
                 });
@@ -429,10 +468,8 @@ namespace Fitness.DAL.Migrations
 
             modelBuilder.Entity("Fitness.DAL.Entities.WorkOutExercise", b =>
                 {
-                    b.Property<Guid>("WorkOutId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ExerciseId")
+                    b.Property<Guid>("UniqueIdentifier")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -440,6 +477,13 @@ namespace Fitness.DAL.Migrations
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
+
+                    b.Property<string>("ExerciseId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ExerciseUniqueIdentifier")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -456,16 +500,21 @@ namespace Fitness.DAL.Migrations
                     b.Property<int>("Sets")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UniqueIdentifier")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("WorkOutId", "ExerciseId");
+                    b.Property<string>("WorkOutId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("ExerciseId");
+                    b.Property<Guid>("WorkOutUniqueIdentifier")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UniqueIdentifier");
+
+                    b.HasIndex("ExerciseUniqueIdentifier");
+
+                    b.HasIndex("WorkOutUniqueIdentifier");
 
                     b.ToTable("WorkOutExercises");
                 });
@@ -499,22 +548,22 @@ namespace Fitness.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "aee5aabd-ff8c-43a8-b602-e01d8a173192",
-                            ConcurrencyStamp = "9798dba4-069f-42fc-9b17-237927729401",
+                            Id = "aff4c66f-76f7-4ab1-b754-a3f17645937d",
+                            ConcurrencyStamp = "1f2204db-7391-4959-9b19-67a9bd9eb347",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
-                            Id = "7bcf251b-3be4-49bb-bdf0-e0047f577716",
-                            ConcurrencyStamp = "d8575301-98f7-480e-8a52-2fc0acdb3d58",
+                            Id = "8d898b7e-b9ac-4637-a4c8-9122b04ec740",
+                            ConcurrencyStamp = "3ca10ef7-2211-46ba-8c1a-c5acb8b0bb99",
                             Name = "FitFamer",
                             NormalizedName = "FITFAMER"
                         },
                         new
                         {
-                            Id = "826178df-b2c2-432b-8419-95f296e27562",
-                            ConcurrencyStamp = "1126f468-0094-45e0-af25-c6f3f61e6f68",
+                            Id = "23ce25d7-f4c7-49fe-946c-63a4d25e71ec",
+                            ConcurrencyStamp = "8c3a00f4-25e2-4c3b-84ee-abd68c6c7fe7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -626,6 +675,36 @@ namespace Fitness.DAL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AchievementFitFamer", b =>
+                {
+                    b.HasOne("Fitness.DAL.Entities.Achievement", null)
+                        .WithMany()
+                        .HasForeignKey("AchievementsUniqueIdentifier")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Fitness.DAL.Entities.FitFamer", null)
+                        .WithMany()
+                        .HasForeignKey("FitFamersUniqueIdentifier")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ExerciseFitFamer", b =>
+                {
+                    b.HasOne("Fitness.DAL.Entities.Exercise", null)
+                        .WithMany()
+                        .HasForeignKey("ExercisesUniqueIdentifier")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Fitness.DAL.Entities.FitFamer", null)
+                        .WithMany()
+                        .HasForeignKey("FitFamersUniqueIdentifier")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Fitness.DAL.Entities.FitFamer", b =>
                 {
                     b.HasOne("Fitness.DAL.Entities.User", "User")
@@ -670,15 +749,15 @@ namespace Fitness.DAL.Migrations
             modelBuilder.Entity("Fitness.DAL.Entities.UserAchievement", b =>
                 {
                     b.HasOne("Fitness.DAL.Entities.Achievement", "Achievement")
-                        .WithMany("UserAchievements")
-                        .HasForeignKey("AchievementId")
+                        .WithMany()
+                        .HasForeignKey("AchievementUniqueIdentifier")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Fitness.DAL.Entities.FitFamer", "FitFamer")
-                        .WithMany("UserAchievements")
+                        .WithMany()
                         .HasForeignKey("FitFamerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Achievement");
@@ -711,15 +790,15 @@ namespace Fitness.DAL.Migrations
             modelBuilder.Entity("Fitness.DAL.Entities.WorkOutExercise", b =>
                 {
                     b.HasOne("Fitness.DAL.Entities.Exercise", "Exercise")
-                        .WithMany("WorkOutExercises")
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany()
+                        .HasForeignKey("ExerciseUniqueIdentifier")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Fitness.DAL.Entities.WorkOut", "WorkOut")
-                        .WithMany("WorkOutExercises")
-                        .HasForeignKey("WorkOutId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany()
+                        .HasForeignKey("WorkOutUniqueIdentifier")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Exercise");
@@ -778,21 +857,9 @@ namespace Fitness.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Fitness.DAL.Entities.Achievement", b =>
-                {
-                    b.Navigation("UserAchievements");
-                });
-
-            modelBuilder.Entity("Fitness.DAL.Entities.Exercise", b =>
-                {
-                    b.Navigation("WorkOutExercises");
-                });
-
             modelBuilder.Entity("Fitness.DAL.Entities.FitFamer", b =>
                 {
                     b.Navigation("MealLogs");
-
-                    b.Navigation("UserAchievements");
 
                     b.Navigation("UserGoals");
                 });
@@ -800,11 +867,6 @@ namespace Fitness.DAL.Migrations
             modelBuilder.Entity("Fitness.DAL.Entities.MealLog", b =>
                 {
                     b.Navigation("FoodStuffWCalories");
-                });
-
-            modelBuilder.Entity("Fitness.DAL.Entities.WorkOut", b =>
-                {
-                    b.Navigation("WorkOutExercises");
                 });
 #pragma warning restore 612, 618
         }

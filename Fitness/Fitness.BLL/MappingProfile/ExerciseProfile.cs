@@ -9,13 +9,9 @@ namespace Fitness.BLL.MappingProfile
     {
         public ExerciseProfile()
         {
-
-
             CreateMap<Exercise, ExercisesDto>();
             CreateMap<ExercisesDto, Exercise>();
             CreateMap<ExerciseForUpdateDto, Exercise>().ReverseMap();
-
-
         }
     }
 }

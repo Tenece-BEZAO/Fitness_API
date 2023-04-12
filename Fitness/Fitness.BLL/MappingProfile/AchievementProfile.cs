@@ -14,7 +14,10 @@ namespace Fitness.BLL.MappingProfile
             CreateMap<AchievementForUpdateDto, Achievement>();
             CreateMap<Achievement, AchievementForUpdateDto>();
             CreateMap<UserAchievement, UserAchievementDto>()
-                .ForMember(dest => dest.DateAchieved, opt => opt.MapFrom(src => src.CreatedAt)).ReverseMap();
+                  .ForMember(dest => dest.DateAchieved, opt => opt.MapFrom(src => src.CreatedAt))
+                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Achievement.Name))
+                  .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Achievement.Description))
+                  .ReverseMap();
         }
     }
 }

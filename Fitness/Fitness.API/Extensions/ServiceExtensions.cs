@@ -61,6 +61,8 @@ namespace Fitness.API.Extensions
             services.AddTransient<IMealLogService, MealLogService>();
             services.AddScoped<IAchievementService, AchievementService>();
             services.AddScoped<IExerciseService, ExerciseService>();
+            services.AddScoped<IWorkOutService, WorkOutService>();
+            services.AddScoped<IWorkOutHistory, WorkOutHistoryService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserGoalService, UserGoalService>();
             services.AddScoped<IAuthService, AuthService>();

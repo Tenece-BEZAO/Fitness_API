@@ -27,7 +27,7 @@ namespace Fitness.BLL.Implementation
 
         public async Task<IEnumerable<Achievement>> GetAchievements()
         {
-            IEnumerable<Achievement> achievementEntity = await _achievement.GetAllAsync();
+            IEnumerable<Achievement> achievementList = await _achievement.GetAllAsync();
             //var result = new List<AchievementsDto>();
             //foreach(var achievement in achievementEntity)
             //{
@@ -40,9 +40,9 @@ namespace Fitness.BLL.Implementation
 
             //    });
             //}
-            if (!achievementEntity.Any())
+            if (!achievementList.Any())
                 throw new InvalidOperationException("Achievement is empty");
-            return achievementEntity;
+            return achievementList;
 
 
         }
@@ -61,9 +61,7 @@ namespace Fitness.BLL.Implementation
 
         public async Task<IEnumerable<UserAchievementDto>> GetUserAchievementsAsync(Guid userId)
         {
-
-            var achievements = await _userAchievement.GetByAsync(x => x.FitFamerId == userId);
-
+            var achievements = await _userAchievement.GetByAsync(x => x.FitFamerId == userId, includeProperties: "Achievement");
 
             IEnumerable<UserAchievementDto> Achievement = _mapper.Map<IEnumerable<UserAchievementDto>>(achievements);
             return Achievement;
@@ -75,7 +73,7 @@ namespace Fitness.BLL.Implementation
                 c.Name.ToLower() == achievementsDto.Name.ToLower());
 
             if (achievementExists)
-                throw new InvalidOperationException("Item already exists");
+                throw new InvalidOperationException("Achievement already exists");
 
             Achievement newAchievement = _mapper.Map<Achievement>(achievementsDto);
 
@@ -97,7 +95,7 @@ namespace Fitness.BLL.Implementation
                 c.Id == achievementId);
 
             if (achievement == null)
-                throw new InvalidOperationException("Item doesnt exist");
+                throw new InvalidOperationException("Achievement doesnt exist");
 
             Achievement newAchievement = _mapper.Map(achievementForUpdateDto, achievement);
 
@@ -109,7 +107,7 @@ namespace Fitness.BLL.Implementation
             var achievement = _achievement.GetByIdAsync(achievementId);
             if (achievement == null)
             {
-                throw new InvalidOperationException("achievement does not exist");
+                throw new InvalidOperationException("Achievement does not exist");
             }
             await _achievement.DeleteByIdAsync(achievementId);
 
@@ -122,7 +120,7 @@ namespace Fitness.BLL.Implementation
             Achievement achievement = await GetAchievement(Id);
 
             if (achievement == null)
-                throw new InvalidOperationException("No  item found");
+                throw new InvalidOperationException("No  achievement found");
 
             AchievementForUpdateDto DataToUpdate = _mapper.Map<AchievementForUpdateDto>(achievement);
 

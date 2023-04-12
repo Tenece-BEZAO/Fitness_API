@@ -47,9 +47,9 @@ namespace Fitness.API.Controllers
         [SwaggerOperation(Summary = "Creates an exercise")]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Creates an exercise", Type = typeof(SuccessResponse))]
 
-        public async Task<ActionResult<Exercise>> CreateExercise(Exercise exercise)
+        public async Task<ActionResult> CreateExercise([FromBody]ExercisesDto exercisesDto)
         {
-            await _exerciseService.CreateExercise(exercise);
+            await _exerciseService.CreateExercise(exercisesDto);
             return Ok();
         }
 
