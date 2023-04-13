@@ -1,20 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 using Fitness.DAL.Enums;
 
-namespace Fitness.DAL.Entities
+namespace Fitness.BLL.DTO
 {
-    public class WorkOutExercise : BaseEntity
+    public class WorkOutHistoryForUpdateDto
     {
         public IntensityLevel IntensityLevel { get; set; }
         public int Duration { get; set; }
         public int Sets { get; set; }
         public int Reps { get; set; }
         public Guid WorkOutId { get; set; }
-        public WorkOut WorkOut { get; set; }
         public Guid ExerciseId { get; set; }
-        public Exercise Exercise { get; set; }
-       
+        public DateTime UpdatedAt { get; set; }
     }
 }
 

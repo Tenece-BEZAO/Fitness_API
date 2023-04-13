@@ -43,7 +43,7 @@ namespace Fitness.API.Controllers
         [AllowAnonymous]
         [HttpGet("get-user-achievement")]
         [SwaggerOperation(Summary = "Gets achievements tied to a user")]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Gets item with user id", Type = typeof(SuccessResponse))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Gets achievement with user id", Type = typeof(SuccessResponse))]
         public async Task<ActionResult<IEnumerable<UserAchievementDto>>> GetUserAchievements(Guid userId)
         {
             IEnumerable<UserAchievementDto> response = await _achievementService.GetUserAchievementsAsync(userId);

@@ -10,10 +10,9 @@ namespace Fitness.DAL.Entities
         public string UserId { get; set; }
         public User User { get; set; }
         public List<UserGoal> UserGoals { get; set; }
-        public List<Achievement> Achievements { get; set; }
-        public List<Exercise> Exercises { get; set; }
+        public List<UserAchievement> UserAchievements { get; set; }
         public List<MealLog> MealLogs { get; set; }
-        //public List<UserMealLog> UserMealLogs { get; set; }
+        
 
 
     }

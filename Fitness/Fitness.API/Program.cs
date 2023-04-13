@@ -1,6 +1,8 @@
 using System.Reflection;
 using Fitness.API.Extensions;
+using Fitness.DAL.DBContext;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NLog;
 
@@ -21,11 +23,16 @@ namespace Fitness.API
             builder.Services.ConfigureLoggerService();
             builder.Services.AddAuthentication();
             builder.Services.ConfigureIdentity();
+            builder.Services.RegisterServices();
             builder.Services.ConfigureServices();
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.ReturnHttpNotAcceptable = true;
+            }).AddNewtonsoftJson()
+            .AddXmlDataContractSerializerFormatters();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddAutoMapper(Assembly.Load("Fitness.BLL"));
             builder.Services.AddEndpointsApiExplorer();

@@ -2,10 +2,11 @@
 {
     public class WorkOut : BaseEntity
     {
-        public int UserId { get; set; }
-        public User User { get; set; }
-        public DateTime Date { get; set; }
+        public Guid FitFamerId { get; set; }
+        public FitFamer FitFamer { get; set; }
+        public DateTime WorkOutDate { get; set; }
         public decimal LiveWeight { get; set; }
+        public List<WorkOutExercise> WorkOutExercises { get; set; }
     }
 }
 

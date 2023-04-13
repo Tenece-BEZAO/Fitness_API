@@ -9,7 +9,7 @@ namespace Fitness.BLL.Interface
     {
         Task<IEnumerable<Exercise>> GetExercises();
         Task<Exercise?> GetExercise(int exerciseId);
-        Task CreateExercise(Exercise exercise);
+        Task CreateExercise(ExercisesDto exerciseDto);
         Task UpdateExercise(int exerciseId, JsonPatchDocument<ExerciseForUpdateDto> jsonPatchDocument);
         Task DeleteExercise(int exerciseId);
     }

@@ -21,20 +21,20 @@ namespace Fitness.BLL.Implementation
 
 
         }
-        public async Task CreateExercise(Exercise exercise)
+        public async Task CreateExercise(ExercisesDto exerciseDto)
         {
             bool exerciseExists = await _exercise.AnyAsync(c =>
-                c.Name.ToLower() == exercise.Name.ToLower());
+                c.Name.ToLower() == exerciseDto.Name.ToLower());
 
             if (exerciseExists)
-                throw new InvalidOperationException("Item already exists");
+                throw new InvalidOperationException("Exercise already exists");
 
-            Exercise newExercise = _mapper.Map<Exercise>(exercise);
+            Exercise newExercise = _mapper.Map<Exercise>(exerciseDto);
 
 
             await _exercise.AddAsync(newExercise);
 
-
+          
         }
 
         public async Task DeleteExercise(int exerciseId)
@@ -73,7 +73,7 @@ namespace Fitness.BLL.Implementation
             Exercise exercise = await GetExercise(exerciseId);
 
             if (exercise == null)
-                throw new InvalidOperationException("No item found");
+                throw new InvalidOperationException("No Exercise found");
 
             ExerciseForUpdateDto DataToUpdate = _mapper.Map<ExerciseForUpdateDto>(exercise);
 
